@@ -1,0 +1,354 @@
+------------------------------------------------------------------------                                  
+-- A T M E L   A V R   M I C R O C O N T R O L L E R S                --                                  
+------------------------------------------------------------------------                                  
+-- BSDL file                                  
+--                                          
+-- File Name:     ATMEGA169.BSD                               
+-- File Revision: 1.1                               
+-- Date created:  2004-10-26                                
+-- Created by:    Atmel Corporation                               
+-- Support:       avr@atmel.com                               
+--                                  
+-- Device:        ATmega169                               
+--                Rev E                               
+-- Package:       64 pin TQFP (default)                               
+--                64 pin MLF                                
+--                                                
+--                                          
+-- Visit http://www.atmel.com for a updated list of BSDL files.                                 
+--                                  
+-- Notes:                                 
+-- 1. The behavior of the Oscillator Boundary Scan cells are dependant                                  
+--    on the Oscillator Fuse settings, and are therefore described as                                 
+--    "internal".                                 
+-- 2. The Boundary Scan cells for controlling the analog features ADC,                                  
+--    Comparator and pin pull-ups are described as "internal".                                  
+--    Note that this feature is in addition to the (digital) cells on                                   
+--    each pin. For information on accessing the pull-up function of the                                  
+--    pins, please read the device data sheet.                                  
+--                                  
+                                  
+entity  ATmega169 is                              
+
+generic (PHYSICAL_PIN_MAP : string := " TQFP  ")    ;
+
+port  (       
+  LCDCAP  : linkage bit ;
+  PG5     : in  bit ;
+  VCC     : linkage bit ;
+  VCC1    : linkage bit ;
+  GND     : linkage bit ;
+  GND1    : linkage bit ;
+  GND2    : linkage bit ;
+  XTAL1   : linkage bit ;
+  XTAL2   : linkage bit ;
+  PA      : inout bit_vector(0 to 7)  ;
+  PB      : inout bit_vector(0 to 7)  ;
+  PC      : inout bit_vector(0 to 7)  ;
+  PD      : inout bit_vector(0 to 7)  ;
+  PE      : inout bit_vector(0 to 7)  ;
+  PF      : inout bit_vector(0 to 3)  ;
+  TCK     : in  bit ;
+  TMS     : in  bit ;
+  TDO     : out bit ;
+  TDI     : in  bit ;
+  PG      : inout bit_vector(0 to 4)  ;
+  AREF    : linkage bit ;
+  AVCC    : linkage bit 
+  );        
+
+use STD_1149_1_1994.all       ;
+
+attribute COMPONENT_CONFORMANCE of  ATmega169 : entity is   
+" STD_1149_1_1993 ";      
+
+attribute PIN_MAP of  ATmega169 : entity is PHYSICAL_PIN_MAP  ;
+          
+constant  TQFP  : PIN_MAP_STRING:=    
+" LCDCAP  : 1 , " &
+" PG5     : 20  , " &
+" VCC     : 21  , " &
+" VCC1    : 52  , " &
+" GND     : 22  , " &
+" GND1    : 53  , " &
+" GND2    : 63  , " &
+" XTAL1   : 24  , " &
+" XTAL2   : 23  , " &
+" PA      : (51,50,49,48,47,46,45,44) , " &
+" PB      : (10,11,12,13,14,15,16,17) , " &
+" PC      : (35,36,37,38,39,40,41,42) , " &
+" PD      : (25,26,27,28,29,30,31,32) , " &
+" PE      : (2,3,4,5,6,7,8,9) , " &
+" PF      : (61,60,59,58) , " &
+" TCK     : 57  , " &
+" TMS     : 56  , " &
+" TDO     : 55  , " &
+" TDI     : 54  , " &
+" PG      : (33,34,43,18,19)  , " &
+" AREF    : 62  , " &
+" AVCC    : 64  " ;
+
+constant  MLF : PIN_MAP_STRING:=    
+" LCDCAP  : 1 , " &
+" PG5     : 20  , " &
+" VCC     : 21  , " &
+" VCC1    : 52  , " &
+" GND     : 22  , " &
+" GND1    : 53  , " &
+" GND2    : 63  , " &
+" XTAL1   : 24  , " &
+" XTAL2   : 23  , " &
+" PA      : (51,50,49,48,47,46,45,44) , " &
+" PB      : (10,11,12,13,14,15,16,17) , " &
+" PC      : (35,36,37,38,39,40,41,42) , " &
+" PD      : (25,26,27,28,29,30,31,32) , " &
+" PE      : (2,3,4,5,6,7,8,9) , " &
+" PF      : (61,60,59,58) , " &
+" TCK     : 57  , " &
+" TMS     : 56  , " &
+" TDO     : 55  , " &
+" TDI     : 54  , " &
+" PG      : (33,34,43,18,19)  , " &
+" AREF    : 62  , " &
+" AVCC    : 64  " ; 
+
+attribute TAP_SCAN_IN of  TDI : signal is true  ;
+attribute TAP_SCAN_OUT  of  TDO : signal is true  ;
+attribute TAP_SCAN_MODE of  TMS : signal is true  ;
+attribute TAP_SCAN_CLOCK  of  TCK : signal is (8.0e6, BOTH) ;
+
+attribute INSTRUCTION_LENGTH  of  ATmega169 : entity is 4 ;
+            
+attribute INSTRUCTION_OPCODE  of  ATmega169 : entity is   
+" EXTEST    ( 0000  )," & 
+" IDCODE    ( 0001  )," & 
+" SAMPLE    ( 0010  )," & 
+" PRIVATE0  ( 1000  )," & 
+" PRIVATE1  ( 1001  )," & 
+" PRIVATE2  ( 1010  )," & 
+" PRIVATE3  ( 1011  )," & 
+" AVR_RESET ( 1100  )," & 
+" BYPASS    ( 1111  )"  ; 
+
+attribute INSTRUCTION_CAPTURE of  ATmega169 : entity is " 0001  ";
+            
+attribute INSTRUCTION_PRIVATE of  ATmega169 : entity is   
+" PRIVATE0  ,"  &     
+" PRIVATE1  ,"  &     
+" PRIVATE2  ,"  &     
+" PRIVATE3  " ;     
+            
+attribute IDCODE_REGISTER of  ATmega169 : entity is   
+  "0100"  &       
+  "1001010000000101"  &       
+  "00000011111" &       
+  "1" ;                             
+
+attribute REGISTER_ACCESS of  ATmega169 : entity is                         
+" BOUNDARY  ( AVR_RESET )"  ;                       
+
+attribute BOUNDARY_LENGTH of  ATmega169 : entity is 198 ;                     
+                                  
+attribute BOUNDARY_REGISTER of  ATmega169 : entity is                         
+--  num   cell    port    func    safe    [ccell    dis   rslt]   
+" 197 ( BC_1  , * , internal  , 1             )," &
+" 196 ( BC_1  , * , internal  , 0             )," &
+" 195 ( BC_1  , * , internal  , 0             )," &
+" 194 ( BC_1  , * , internal  , 0             )," &
+" 193 ( BC_1  , * , internal  , 0             )," &
+" 192 ( BC_1  , * , internal  , 0             )," &
+" 191 ( BC_1  , * , internal  , 0             )," &
+" 190 ( BC_1  , * , internal  , 0             )," &
+" 189 ( BC_1  , * , internal  , 0             )," &
+" 188 ( BC_1  , * , internal  , 0             )," &
+" 187 ( BC_1  , * , internal  , 0             )," &
+" 186 ( BC_1  , * , internal  , 1             )," &
+" 185 ( BC_1  , * , internal  , 0             )," &
+" 184 ( BC_1  , * , internal  , 0             )," &
+" 183 ( BC_1  , * , internal  , 0             )," &
+" 182 ( BC_1  , * , internal  , 0             )," &
+" 181 ( BC_1  , * , internal  , 0             )," &
+" 180 ( BC_1  , * , internal  , 0             )," &
+" 179 ( BC_1  , * , internal  , 0             )," &
+" 178 ( BC_1  , * , internal  , 0             )," &
+" 177 ( BC_1  , * , internal  , 0             )," &
+" 176 ( BC_1  , * , internal  , 1             )," &
+" 175 ( BC_1  , * , internal  , 0             )," &
+" 174 ( BC_1  , * , internal  , 1             )," &
+" 173 ( BC_1  , * , internal  , 0             )," &
+" 172 ( BC_1  , * , internal  , 0             )," &
+" 171 ( BC_1  , * , internal  , 0             )," &
+" 170 ( BC_1  , * , internal  , 0             )," &
+" 169 ( BC_1  , * , internal  , 0             )," &
+" 168 ( BC_1  , * , internal  , 0             )," &
+" 167 ( BC_1  , * , internal  , 0             )," &
+" 166 ( BC_1  , * , internal  , 0             )," &
+" 165 ( BC_1  , * , internal  , 1             )," &
+" 164 ( BC_1  , * , internal  , 0             )," &
+" 163 ( BC_1  , * , internal  , 0             )," &
+" 162 ( BC_1  , * , internal  , 0             )," &
+" 161 ( BC_1  , * , internal  , 1             )," &
+" 160 ( BC_1  , * , internal  , 1             )," &
+" 159 ( BC_1  , * , internal  , 0             )," &
+" 158 ( BC_1  , * , internal  , 0             )," &
+" 157 ( BC_7  , PE(0) , bidir , X , 156 , 0 , Z )," &
+" 156 ( BC_1  , * , control , 0             )," &
+" 155 ( BC_1  , * , internal  , 0             )," &
+" 154 ( BC_7  , PE(1) , bidir , X , 153 , 0 , Z )," &
+" 153 ( BC_1  , * , control , 0             )," &
+" 152 ( BC_1  , * , internal  , 0             )," &
+" 151 ( BC_7  , PE(2) , bidir , X , 150 , 0 , Z )," &
+" 150 ( BC_1  , * , control , 0             )," &
+" 149 ( BC_1  , * , internal  , 0             )," &
+" 148 ( BC_7  , PE(3) , bidir , X , 147 , 0 , Z )," &
+" 147 ( BC_1  , * , control , 0             )," &
+" 146 ( BC_1  , * , internal  , 0             )," &
+" 145 ( BC_7  , PE(4) , bidir , X , 144 , 0 , Z )," &
+" 144 ( BC_1  , * , control , 0             )," &
+" 143 ( BC_1  , * , internal  , 0             )," &
+" 142 ( BC_7  , PE(5) , bidir , X , 141 , 0 , Z )," &
+" 141 ( BC_1  , * , control , 0             )," &
+" 140 ( BC_1  , * , internal  , 0             )," &
+" 139 ( BC_7  , PE(6) , bidir , X , 138 , 0 , Z )," &
+" 138 ( BC_1  , * , control , 0             )," &
+" 137 ( BC_1  , * , internal  , 0             )," &
+" 136 ( BC_7  , PE(7) , bidir , X , 135 , 0 , Z )," &
+" 135 ( BC_1  , * , control , 0             )," &
+" 134 ( BC_1  , * , internal  , 0             )," &
+" 133 ( BC_7  , PB(0) , bidir , X , 132 , 0 , Z )," &
+" 132 ( BC_1  , * , control , 0             )," &
+" 131 ( BC_1  , * , internal  , 0             )," &
+" 130 ( BC_7  , PB(1) , bidir , X , 129 , 0 , Z )," &
+" 129 ( BC_1  , * , control , 0             )," &
+" 128 ( BC_1  , * , internal  , 0             )," &
+" 127 ( BC_7  , PB(2) , bidir , X , 126 , 0 , Z )," &
+" 126 ( BC_1  , * , control , 0             )," &
+" 125 ( BC_1  , * , internal  , 0             )," &
+" 124 ( BC_7  , PB(3) , bidir , X , 123 , 0 , Z )," &
+" 123 ( BC_1  , * , control , 0             )," &
+" 122 ( BC_1  , * , internal  , 0             )," &
+" 121 ( BC_7  , PB(4) , bidir , X , 120 , 0 , Z )," &
+" 120 ( BC_1  , * , control , 0             )," &
+" 119 ( BC_1  , * , internal  , 0             )," &
+" 118 ( BC_7  , PB(5) , bidir , X , 117 , 0 , Z )," &
+" 117 ( BC_1  , * , control , 0             )," &
+" 116 ( BC_1  , * , internal  , 0             )," &
+" 115 ( BC_7  , PB(6) , bidir , X , 114 , 0 , Z )," &
+" 114 ( BC_1  , * , control , 0             )," &
+" 113 ( BC_1  , * , internal  , 0             )," &
+" 112 ( BC_7  , PB(7) , bidir , X , 111 , 0 , Z )," &
+" 111 ( BC_1  , * , control , 0             )," &
+" 110 ( BC_1  , * , internal  , 0             )," &
+" 109 ( BC_7  , PG(3) , bidir , X , 108 , 0 , Z )," &
+" 108 ( BC_1  , * , control , 0             )," &
+" 107 ( BC_1  , * , internal  , 0             )," &
+" 106 ( BC_7  , PG(4) , bidir , X , 105 , 0 , Z )," &
+" 105 ( BC_1  , * , control , 0             )," &
+" 104 ( BC_1  , * , internal  , 0             )," &
+" 103 ( BC_4  , PG5 , observe_only  , X             )," &
+" 102 ( BC_4  , * , internal  , X             )," &
+" 101 ( BC_4  , * , internal  , X             )," &
+" 100 ( BC_1  , * , internal  , X             )," &
+" 99  ( BC_1  , * , internal  , X             )," &
+" 98  ( BC_1  , * , internal  , X             )," &
+" 97  ( BC_1  , * , internal  , X             )," &
+" 96  ( BC_4  , * , internal  , X             )," &
+" 95  ( BC_4  , * , internal  , X             )," &
+" 94  ( BC_4  , * , internal  , X             )," &
+" 93  ( BC_4  , * , internal  , X             )," &
+" 92  ( BC_7  , PD(0) , bidir , X , 91  , 0 , Z )," &
+" 91  ( BC_1  , * , control , 0             )," &
+" 90  ( BC_1  , * , internal  , 0             )," &
+" 89  ( BC_7  , PD(1) , bidir , X , 88  , 0 , Z )," &
+" 88  ( BC_1  , * , control , 0             )," &
+" 87  ( BC_1  , * , internal  , 0             )," &
+" 86  ( BC_7  , PD(2) , bidir , X , 85  , 0 , Z )," &
+" 85  ( BC_1  , * , control , 0             )," &
+" 84  ( BC_1  , * , internal  , 0             )," &
+" 83  ( BC_7  , PD(3) , bidir , X , 82  , 0 , Z )," &
+" 82  ( BC_1  , * , control , 0             )," &
+" 81  ( BC_1  , * , internal  , 0             )," &
+" 80  ( BC_7  , PD(4) , bidir , X , 79  , 0 , Z )," &
+" 79  ( BC_1  , * , control , 0             )," &
+" 78  ( BC_1  , * , internal  , 0             )," &
+" 77  ( BC_7  , PD(5) , bidir , X , 76  , 0 , Z )," &
+" 76  ( BC_1  , * , control , 0             )," &
+" 75  ( BC_1  , * , internal  , 0             )," &
+" 74  ( BC_7  , PD(6) , bidir , X , 73  , 0 , Z )," &
+" 73  ( BC_1  , * , control , 0             )," &
+" 72  ( BC_1  , * , internal  , 0             )," &
+" 71  ( BC_7  , PD(7) , bidir , X , 70  , 0 , Z )," &
+" 70  ( BC_1  , * , control , 0             )," &
+" 69  ( BC_1  , * , internal  , 0             )," &
+" 68  ( BC_7  , PG(0) , bidir , X , 67  , 0 , Z )," &
+" 67  ( BC_1  , * , control , 0             )," &
+" 66  ( BC_1  , * , internal  , 0             )," &
+" 65  ( BC_7  , PG(1) , bidir , X , 64  , 0 , Z )," &
+" 64  ( BC_1  , * , control , 0             )," &
+" 63  ( BC_1  , * , internal  , 0             )," &
+" 62  ( BC_7  , PC(0) , bidir , X , 61  , 0 , Z )," &
+" 61  ( BC_1  , * , control , 0             )," &
+" 60  ( BC_1  , * , internal  , 0             )," &
+" 59  ( BC_7  , PC(1) , bidir , X , 58  , 0 , Z )," &
+" 58  ( BC_1  , * , control , 0             )," &
+" 57  ( BC_1  , * , internal  , 0             )," &
+" 56  ( BC_7  , PC(2) , bidir , X , 55  , 0 , Z )," &
+" 55  ( BC_1  , * , control , 0             )," &
+" 54  ( BC_1  , * , internal  , 0             )," &
+" 53  ( BC_7  , PC(3) , bidir , X , 52  , 0 , Z )," &
+" 52  ( BC_1  , * , control , 0             )," &
+" 51  ( BC_1  , * , internal  , 0             )," &
+" 50  ( BC_7  , PC(4) , bidir , X , 49  , 0 , Z )," &
+" 49  ( BC_1  , * , control , 0             )," &
+" 48  ( BC_1  , * , internal  , 0             )," &
+" 47  ( BC_7  , PC(5) , bidir , X , 46  , 0 , Z )," &
+" 46  ( BC_1  , * , control , 0             )," &
+" 45  ( BC_1  , * , internal  , 0             )," &
+" 44  ( BC_7  , PC(6) , bidir , X , 43  , 0 , Z )," &
+" 43  ( BC_1  , * , control , 0             )," &
+" 42  ( BC_1  , * , internal  , 0             )," &
+" 41  ( BC_7  , PC(7) , bidir , X , 40  , 0 , Z )," &
+" 40  ( BC_1  , * , control , 0             )," &
+" 39  ( BC_1  , * , internal  , 0             )," &
+" 38  ( BC_7  , PG(2) , bidir , X , 37  , 0 , Z )," &
+" 37  ( BC_1  , * , control , 0             )," &
+" 36  ( BC_1  , * , internal  , 0             )," &
+" 35  ( BC_7  , PA(7) , bidir , X , 34  , 0 , Z )," &
+" 34  ( BC_1  , * , control , 0             )," &
+" 33  ( BC_1  , * , internal  , 0             )," &
+" 32  ( BC_7  , PA(6) , bidir , X , 31  , 0 , Z )," &
+" 31  ( BC_1  , * , control , 0             )," &
+" 30  ( BC_1  , * , internal  , 0             )," &
+" 29  ( BC_7  , PA(5) , bidir , X , 28  , 0 , Z )," &
+" 28  ( BC_1  , * , control , 0             )," &
+" 27  ( BC_1  , * , internal  , 0             )," &
+" 26  ( BC_7  , PA(4) , bidir , X , 25  , 0 , Z )," &
+" 25  ( BC_1  , * , control , 0             )," &
+" 24  ( BC_1  , * , internal  , 0             )," &
+" 23  ( BC_7  , PA(3) , bidir , X , 22  , 0 , Z )," &
+" 22  ( BC_1  , * , control , 0             )," &
+" 21  ( BC_1  , * , internal  , 0             )," &
+" 20  ( BC_7  , PA(2) , bidir , X , 19  , 0 , Z )," &
+" 19  ( BC_1  , * , control , 0             )," &
+" 18  ( BC_1  , * , internal  , 0             )," &
+" 17  ( BC_7  , PA(1) , bidir , X , 16  , 0 , Z )," &
+" 16  ( BC_1  , * , control , 0             )," &
+" 15  ( BC_1  , * , internal  , 0             )," &
+" 14  ( BC_7  , PA(0) , bidir , X , 13  , 0 , Z )," &
+" 13  ( BC_1  , * , control , 0             )," &
+" 12  ( BC_1  , * , internal  , 0             )," &
+" 11  ( BC_7  , PF(3) , bidir , X , 10  , 0 , Z )," &
+" 10  ( BC_1  , * , control , 0             )," &
+" 9 ( BC_1  , * , internal  , 0             )," &
+" 8 ( BC_7  , PF(2) , bidir , X , 7 , 0 , Z )," &
+" 7 ( BC_1  , * , control , 0             )," &
+" 6 ( BC_1  , * , internal  , 0             )," &
+" 5 ( BC_7  , PF(1) , bidir , X , 4 , 0 , Z )," &
+" 4 ( BC_1  , * , control , 0             )," &
+" 3 ( BC_1  , * , internal  , 0             )," &
+" 2 ( BC_7  , PF(0) , bidir , X , 1 , 0 , Z )," &
+" 1 ( BC_1  , * , control , 0             )," &
+" 0 ( BC_1  , * , internal  , 0             )"  ;
+
+
+end ATmega169 ;

@@ -1,0 +1,582 @@
+<?xml version="1.0"?>
+<CONFIG>
+  <ProjectOptions>
+    <PathDelim Value="\"/>
+    <Version Value="7"/>
+    <General>
+      <Flags>
+        <AlwaysBuild Value="False"/>
+        <LRSInOutputDirectory Value="False"/>
+      </Flags>
+      <MainUnit Value="0"/>
+      <TargetFileExt Value=".exe"/>
+      <ResourceType Value="res"/>
+      <Icon Value="0"/>
+      <UseXPManifest Value="True"/>
+      <ActiveEditorIndexAtStart Value="1"/>
+    </General>
+    <i18n>
+      <EnableI18N Value="True"/>
+      <OutDir Value="..\languages"/>
+    </i18n>
+    <VersionInfo>
+      <ProjectVersion Value=""/>
+      <Language Value="0403"/>
+      <CharSet Value="04E2"/>
+    </VersionInfo>
+    <PublishOptions>
+      <Version Value="2"/>
+      <IgnoreBinaries Value="False"/>
+      <IncludeFileFilter Value="*.(pas|pp|inc|lfm|lpr|lrs|lpi|lpk|sh|xml)"/>
+      <ExcludeFileFilter Value="*.(bak|ppu|ppw|o|so);*~;backup"/>
+    </PublishOptions>
+    <RunParams>
+      <local>
+        <FormatVersion Value="1"/>
+        <LaunchingApplication PathPlusParams="/usr/X11R6/bin/xterm -T 'Lazarus Run Output' -e $(LazarusDir)/tools/runwait.sh $(TargetCmdLine)"/>
+      </local>
+    </RunParams>
+    <RequiredPackages Count="2">
+      <Item1>
+        <PackageName Value="general"/>
+      </Item1>
+      <Item2>
+        <PackageName Value="LCL"/>
+      </Item2>
+    </RequiredPackages>
+    <Units Count="52">
+      <Unit0>
+        <Filename Value="usbavrboundary.lpr"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="usbavrboundary"/>
+        <CursorPos X="1" Y="14"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="178"/>
+      </Unit0>
+      <Unit1>
+        <Filename Value="umain.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="fMain"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="uMain"/>
+        <CursorPos X="36" Y="143"/>
+        <TopLine Value="136"/>
+        <EditorIndex Value="0"/>
+        <UsageCount Value="178"/>
+        <Loaded Value="True"/>
+      </Unit1>
+      <Unit2>
+        <Filename Value="ubsdl.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="uBSDL"/>
+        <CursorPos X="37" Y="123"/>
+        <TopLine Value="105"/>
+        <EditorIndex Value="6"/>
+        <UsageCount Value="178"/>
+        <Bookmarks Count="1">
+          <Item0 X="32" Y="86" ID="0"/>
+        </Bookmarks>
+        <Loaded Value="True"/>
+      </Unit2>
+      <Unit3>
+        <Filename Value="..\..\..\..\Dokumente und Einstellungen\Ulrich\Desktop\avr bdsl\ATMEGA162.BSD"/>
+        <CursorPos X="33" Y="54"/>
+        <TopLine Value="40"/>
+        <UsageCount Value="9"/>
+        <SyntaxHighlighter Value="None"/>
+      </Unit3>
+      <Unit4>
+        <Filename Value="..\..\..\..\Dokumente und Einstellungen\Ulrich\Desktop\urjtag-0.9\data\atmel\atmega128\atmega128"/>
+        <CursorPos X="1" Y="1"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="9"/>
+        <SyntaxHighlighter Value="None"/>
+      </Unit4>
+      <Unit5>
+        <Filename Value="..\..\..\..\Dokumente und Einstellungen\Ulrich\Desktop\urjtag-0.9\src\bsdl\bsdl.c"/>
+        <CursorPos X="1" Y="1"/>
+        <TopLine Value="166"/>
+        <UsageCount Value="9"/>
+        <SyntaxHighlighter Value="C++"/>
+      </Unit5>
+      <Unit6>
+        <Filename Value="..\..\..\..\Dokumente und Einstellungen\Ulrich\Desktop\urjtag-0.9\src\bsdl\bsdl_bison.c"/>
+        <CursorPos X="1" Y="1"/>
+        <TopLine Value="100"/>
+        <UsageCount Value="9"/>
+        <SyntaxHighlighter Value="C++"/>
+      </Unit6>
+      <Unit7>
+        <Filename Value="..\..\..\..\Dokumente und Einstellungen\Ulrich\Desktop\urjtag-0.9\src\bsdl\bsdl_flex.l"/>
+        <CursorPos X="1" Y="1"/>
+        <TopLine Value="232"/>
+        <UsageCount Value="9"/>
+        <SyntaxHighlighter Value="None"/>
+      </Unit7>
+      <Unit8>
+        <Filename Value="..\..\..\..\Dokumente und Einstellungen\Ulrich\Desktop\urjtag-0.9\src\bsdl\bsdl_bison.y"/>
+        <CursorPos X="1" Y="1"/>
+        <TopLine Value="379"/>
+        <UsageCount Value="9"/>
+        <SyntaxHighlighter Value="None"/>
+      </Unit8>
+      <Unit9>
+        <Filename Value="..\..\..\..\Dokumente und Einstellungen\Ulrich\Desktop\urjtag-0.9\src\bsdl\VHDL1.L"/>
+        <CursorPos X="1" Y="1"/>
+        <TopLine Value="241"/>
+        <UsageCount Value="9"/>
+        <SyntaxHighlighter Value="None"/>
+      </Unit9>
+      <Unit10>
+        <Filename Value="..\..\..\..\Dokumente und Einstellungen\Ulrich\Desktop\Neuer Ordner\VHDL1.L"/>
+        <CursorPos X="7" Y="1"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="9"/>
+        <SyntaxHighlighter Value="None"/>
+      </Unit10>
+      <Unit11>
+        <Filename Value="..\..\..\..\Dokumente und Einstellungen\Ulrich\Desktop\Neuer Ordner\bsdl.l"/>
+        <CursorPos X="1" Y="1"/>
+        <TopLine Value="10"/>
+        <UsageCount Value="9"/>
+        <SyntaxHighlighter Value="None"/>
+      </Unit11>
+      <Unit12>
+        <Filename Value="..\..\..\..\Dokumente und Einstellungen\Ulrich\Desktop\Neuer Ordner\digram.l"/>
+        <CursorPos X="59" Y="15"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="9"/>
+        <SyntaxHighlighter Value="None"/>
+      </Unit12>
+      <Unit13>
+        <Filename Value="..\..\..\..\Dokumente und Einstellungen\Ulrich\Desktop\Neuer Ordner\lengs.l"/>
+        <CursorPos X="1" Y="1"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="9"/>
+        <SyntaxHighlighter Value="None"/>
+      </Unit13>
+      <Unit14>
+        <Filename Value="..\..\..\..\Dokumente und Einstellungen\Ulrich\Desktop\Neuer Ordner\expr.y"/>
+        <CursorPos X="1" Y="1"/>
+        <TopLine Value="27"/>
+        <UsageCount Value="9"/>
+        <SyntaxHighlighter Value="None"/>
+      </Unit14>
+      <Unit15>
+        <Filename Value="..\..\..\..\Dokumente und Einstellungen\Ulrich\Desktop\Neuer Ordner\pas.y"/>
+        <CursorPos X="1" Y="1"/>
+        <TopLine Value="76"/>
+        <UsageCount Value="9"/>
+        <SyntaxHighlighter Value="None"/>
+      </Unit15>
+      <Unit16>
+        <Filename Value="..\..\..\..\Dokumente und Einstellungen\Ulrich\Desktop\avr bdsl\ATMEGA16.BSD"/>
+        <CursorPos X="26" Y="174"/>
+        <TopLine Value="119"/>
+        <UsageCount Value="2"/>
+        <SyntaxHighlighter Value="None"/>
+      </Unit16>
+      <Unit17>
+        <Filename Value="..\..\..\..\Programme\lazarus\fpc\2.2.3\source\rtl\i386\i386.inc"/>
+        <CursorPos X="34" Y="1327"/>
+        <TopLine Value="1303"/>
+        <UsageCount Value="8"/>
+      </Unit17>
+      <Unit18>
+        <Filename Value="..\..\..\..\Programme\lazarus\fpc\2.2.3\source\rtl\objpas\classes\lists.inc"/>
+        <CursorPos X="1" Y="501"/>
+        <TopLine Value="479"/>
+        <UsageCount Value="17"/>
+      </Unit18>
+      <Unit19>
+        <Filename Value="..\..\..\..\Dokumente und Einstellungen\Ulrich\Desktop\avr bdsl\ATMEGA128.BSD"/>
+        <CursorPos X="28" Y="162"/>
+        <TopLine Value="136"/>
+        <UsageCount Value="9"/>
+        <SyntaxHighlighter Value="None"/>
+      </Unit19>
+      <Unit20>
+        <Filename Value="..\..\..\..\Programme\lazarus\fpc\2.2.3\source\rtl\objpas\classes\classesh.inc"/>
+        <CursorPos X="1" Y="260"/>
+        <TopLine Value="238"/>
+        <UsageCount Value="7"/>
+      </Unit20>
+      <Unit21>
+        <Filename Value="..\..\..\..\Dokumente und Einstellungen\Ulrich\Desktop\TQFP32.tgr"/>
+        <CursorPos X="46" Y="13"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="9"/>
+        <SyntaxHighlighter Value="None"/>
+      </Unit21>
+      <Unit22>
+        <Filename Value="..\..\..\..\Dokumente und Einstellungen\Ulrich\Desktop\TQFP32.dif"/>
+        <CursorPos X="1" Y="10"/>
+        <TopLine Value="325"/>
+        <UsageCount Value="9"/>
+        <SyntaxHighlighter Value="None"/>
+      </Unit22>
+      <Unit23>
+        <Filename Value="..\..\..\..\Dokumente und Einstellungen\Ulrich\Desktop\Anschlussplatine.dif"/>
+        <CursorPos X="4" Y="697"/>
+        <TopLine Value="718"/>
+        <UsageCount Value="9"/>
+        <SyntaxHighlighter Value="None"/>
+      </Unit23>
+      <Unit24>
+        <Filename Value="uscanchain.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="fScanChain"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="uScanChain"/>
+        <CursorPos X="2" Y="448"/>
+        <TopLine Value="448"/>
+        <EditorIndex Value="4"/>
+        <UsageCount Value="173"/>
+        <Loaded Value="True"/>
+      </Unit24>
+      <Unit25>
+        <Filename Value="..\..\..\..\Programme\lazarus\lcl\include\treeview.inc"/>
+        <CursorPos X="26" Y="1585"/>
+        <TopLine Value="1561"/>
+        <UsageCount Value="4"/>
+      </Unit25>
+      <Unit26>
+        <Filename Value="..\..\..\..\Programme\lazarus\fpc\2.2.3\source\rtl\inc\except.inc"/>
+        <CursorPos X="1" Y="193"/>
+        <TopLine Value="171"/>
+        <UsageCount Value="20"/>
+      </Unit26>
+      <Unit27>
+        <Filename Value="..\..\..\..\Dokumente und Einstellungen\Ulrich\Desktop\avr bdsl\atmega32.bsd"/>
+        <CursorPos X="54" Y="266"/>
+        <TopLine Value="182"/>
+        <UsageCount Value="9"/>
+        <SyntaxHighlighter Value="None"/>
+      </Unit27>
+      <Unit28>
+        <Filename Value="libusb.pas"/>
+        <UnitName Value="libusb"/>
+        <CursorPos X="1" Y="565"/>
+        <TopLine Value="543"/>
+        <UsageCount Value="3"/>
+      </Unit28>
+      <Unit29>
+        <Filename Value="..\..\..\..\Programme\lazarus\fpc\2.2.3\source\rtl\inc\systemh.inc"/>
+        <CursorPos X="11" Y="428"/>
+        <TopLine Value="406"/>
+        <UsageCount Value="6"/>
+      </Unit29>
+      <Unit30>
+        <Filename Value="..\output\i386-win32\data\ATMEGA16.BSD"/>
+        <CursorPos X="84" Y="302"/>
+        <TopLine Value="259"/>
+        <UsageCount Value="58"/>
+        <SyntaxHighlighter Value="None"/>
+      </Unit30>
+      <Unit31>
+        <Filename Value="..\..\..\..\Programme\lazarus\fpc\2.2.3\source\rtl\objpas\sysutils\sysstr.inc"/>
+        <CursorPos X="1" Y="800"/>
+        <TopLine Value="778"/>
+        <UsageCount Value="20"/>
+      </Unit31>
+      <Unit32>
+        <Filename Value="..\..\..\..\Programme\lazarus\fpc\2.2.3\source\rtl\inc\system.inc"/>
+        <CursorPos X="46" Y="864"/>
+        <TopLine Value="837"/>
+        <UsageCount Value="5"/>
+      </Unit32>
+      <Unit33>
+        <Filename Value="binutils.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="BinUtils"/>
+        <CursorPos X="1" Y="26"/>
+        <TopLine Value="4"/>
+        <UsageCount Value="110"/>
+      </Unit33>
+      <Unit34>
+        <Filename Value="..\..\..\..\Programme\lazarus\fpc\2.2.3\source\rtl\objpas\classes\streams.inc"/>
+        <CursorPos X="1" Y="458"/>
+        <TopLine Value="436"/>
+        <UsageCount Value="6"/>
+      </Unit34>
+      <Unit35>
+        <Filename Value="..\output\i386-win32\data\idcodes.dat"/>
+        <CursorPos X="1" Y="1"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="6"/>
+        <SyntaxHighlighter Value="None"/>
+      </Unit35>
+      <Unit36>
+        <Filename Value="..\..\..\..\Programme\lazarus\fpc\2.2.3\source\rtl\inc\dynarr.inc"/>
+        <CursorPos X="1" Y="41"/>
+        <TopLine Value="19"/>
+        <UsageCount Value="7"/>
+      </Unit36>
+      <Unit37>
+        <Filename Value="..\..\..\..\Programme\lazarus\fpc\2.2.3\source\rtl\inc\astrings.inc"/>
+        <CursorPos X="1" Y="745"/>
+        <TopLine Value="723"/>
+        <UsageCount Value="8"/>
+      </Unit37>
+      <Unit38>
+        <Filename Value="..\..\..\..\Programme\lazarus\components\compilers\c\lazcutil.pas"/>
+        <UnitName Value="LazCUtil"/>
+        <CursorPos X="1" Y="1"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="7"/>
+      </Unit38>
+      <Unit39>
+        <Filename Value="..\..\..\..\Programme\lazarus\ide\editoroptions.pp"/>
+        <UnitName Value="EditorOptions"/>
+        <CursorPos X="47" Y="438"/>
+        <TopLine Value="416"/>
+        <UsageCount Value="7"/>
+      </Unit39>
+      <Unit40>
+        <Filename Value="..\..\..\..\Programme\lazarus\fpc\2.2.3\source\rtl\i386\fastmove.inc"/>
+        <CursorPos X="29" Y="809"/>
+        <TopLine Value="796"/>
+        <UsageCount Value="8"/>
+      </Unit40>
+      <Unit41>
+        <Filename Value="..\output\i386-win32\data\ATMEGA162.BSD"/>
+        <CursorPos X="30" Y="222"/>
+        <TopLine Value="219"/>
+        <UsageCount Value="25"/>
+        <SyntaxHighlighter Value="None"/>
+      </Unit41>
+      <Unit42>
+        <Filename Value="udrawic.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="uDrawIC"/>
+        <CursorPos X="22" Y="458"/>
+        <TopLine Value="444"/>
+        <EditorIndex Value="5"/>
+        <UsageCount Value="37"/>
+        <Loaded Value="True"/>
+      </Unit42>
+      <Unit43>
+        <Filename Value="..\..\..\..\Programme\lazarus\fpc\2.2.5\source\rtl\objpas\classes\classesh.inc"/>
+        <CursorPos X="17" Y="256"/>
+        <TopLine Value="236"/>
+        <UsageCount Value="10"/>
+      </Unit43>
+      <Unit44>
+        <Filename Value="..\..\..\..\Programme\lazarus\lcl\include\rasterimage.inc"/>
+        <CursorPos X="1" Y="298"/>
+        <TopLine Value="278"/>
+        <UsageCount Value="10"/>
+      </Unit44>
+      <Unit45>
+        <Filename Value="..\..\..\..\Programme\lazarus\lcl\graphics.pp"/>
+        <UnitName Value="Graphics"/>
+        <CursorPos X="98" Y="1043"/>
+        <TopLine Value="1030"/>
+        <UsageCount Value="12"/>
+      </Unit45>
+      <Unit46>
+        <Filename Value="..\..\..\..\Programme\lazarus\lcl\lclintf.pas"/>
+        <UnitName Value="LCLIntf"/>
+        <CursorPos X="1" Y="1"/>
+        <TopLine Value="145"/>
+        <UsageCount Value="10"/>
+      </Unit46>
+      <Unit47>
+        <Filename Value="..\..\..\..\Programme\lazarus\lcl\lclproc.pas"/>
+        <UnitName Value="LCLProc"/>
+        <CursorPos X="1" Y="1"/>
+        <TopLine Value="19"/>
+        <UsageCount Value="10"/>
+      </Unit47>
+      <Unit48>
+        <Filename Value="version.inc"/>
+        <IsPartOfProject Value="True"/>
+        <CursorPos X="2" Y="1"/>
+        <TopLine Value="1"/>
+        <EditorIndex Value="2"/>
+        <UsageCount Value="22"/>
+        <Loaded Value="True"/>
+      </Unit48>
+      <Unit49>
+        <Filename Value="revision.inc"/>
+        <IsPartOfProject Value="True"/>
+        <CursorPos X="2" Y="1"/>
+        <TopLine Value="1"/>
+        <EditorIndex Value="3"/>
+        <UsageCount Value="22"/>
+        <Loaded Value="True"/>
+      </Unit49>
+      <Unit50>
+        <Filename Value="..\..\..\DOCUMENTS@M&amp;&amp;1666&amp;&amp;5x&amp;&amp;1939712949\Software\src\umain.pas"/>
+        <UnitName Value="umain"/>
+        <CursorPos X="1" Y="291"/>
+        <TopLine Value="277"/>
+        <EditorIndex Value="1"/>
+        <UsageCount Value="11"/>
+        <Loaded Value="True"/>
+      </Unit50>
+      <Unit51>
+        <Filename Value="..\..\..\..\Source\general\src\uinfo.pas"/>
+        <ComponentName Value="fInfo"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="uInfo"/>
+        <CursorPos X="1" Y="1"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="10"/>
+      </Unit51>
+    </Units>
+    <JumpHistory Count="30" HistoryIndex="29">
+      <Position1>
+        <Filename Value="umain.pas"/>
+        <Caret Line="94" Column="14" TopLine="82"/>
+      </Position1>
+      <Position2>
+        <Filename Value="umain.pas"/>
+        <Caret Line="97" Column="58" TopLine="84"/>
+      </Position2>
+      <Position3>
+        <Filename Value="..\..\..\DOCUMENTS@M&amp;&amp;1666&amp;&amp;5x&amp;&amp;1939712949\Software\src\umain.pas"/>
+        <Caret Line="95" Column="43" TopLine="85"/>
+      </Position3>
+      <Position4>
+        <Filename Value="umain.pas"/>
+        <Caret Line="99" Column="50" TopLine="90"/>
+      </Position4>
+      <Position5>
+        <Filename Value="umain.pas"/>
+        <Caret Line="177" Column="15" TopLine="164"/>
+      </Position5>
+      <Position6>
+        <Filename Value="umain.pas"/>
+        <Caret Line="185" Column="31" TopLine="156"/>
+      </Position6>
+      <Position7>
+        <Filename Value="umain.pas"/>
+        <Caret Line="167" Column="46" TopLine="156"/>
+      </Position7>
+      <Position8>
+        <Filename Value="umain.pas"/>
+        <Caret Line="176" Column="59" TopLine="164"/>
+      </Position8>
+      <Position9>
+        <Filename Value="uscanchain.pas"/>
+        <Caret Line="52" Column="30" TopLine="43"/>
+      </Position9>
+      <Position10>
+        <Filename Value="uscanchain.pas"/>
+        <Caret Line="1029" Column="51" TopLine="1017"/>
+      </Position10>
+      <Position11>
+        <Filename Value="uscanchain.pas"/>
+        <Caret Line="49" Column="16" TopLine="40"/>
+      </Position11>
+      <Position12>
+        <Filename Value="uscanchain.pas"/>
+        <Caret Line="60" Column="27" TopLine="48"/>
+      </Position12>
+      <Position13>
+        <Filename Value="uscanchain.pas"/>
+        <Caret Line="1031" Column="14" TopLine="1019"/>
+      </Position13>
+      <Position14>
+        <Filename Value="umain.pas"/>
+        <Caret Line="176" Column="90" TopLine="164"/>
+      </Position14>
+      <Position15>
+        <Filename Value="umain.pas"/>
+        <Caret Line="183" Column="1" TopLine="171"/>
+      </Position15>
+      <Position16>
+        <Filename Value="uscanchain.pas"/>
+        <Caret Line="1054" Column="35" TopLine="1045"/>
+      </Position16>
+      <Position17>
+        <Filename Value="uscanchain.pas"/>
+        <Caret Line="48" Column="1" TopLine="36"/>
+      </Position17>
+      <Position18>
+        <Filename Value="uscanchain.pas"/>
+        <Caret Line="1044" Column="7" TopLine="1031"/>
+      </Position18>
+      <Position19>
+        <Filename Value="uscanchain.pas"/>
+        <Caret Line="1068" Column="6" TopLine="1055"/>
+      </Position19>
+      <Position20>
+        <Filename Value="uscanchain.pas"/>
+        <Caret Line="1082" Column="134" TopLine="1065"/>
+      </Position20>
+      <Position21>
+        <Filename Value="uscanchain.pas"/>
+        <Caret Line="1092" Column="27" TopLine="1078"/>
+      </Position21>
+      <Position22>
+        <Filename Value="umain.pas"/>
+        <Caret Line="101" Column="48" TopLine="90"/>
+      </Position22>
+      <Position23>
+        <Filename Value="umain.pas"/>
+        <Caret Line="203" Column="43" TopLine="191"/>
+      </Position23>
+      <Position24>
+        <Filename Value="uscanchain.pas"/>
+        <Caret Line="223" Column="29" TopLine="211"/>
+      </Position24>
+      <Position25>
+        <Filename Value="umain.pas"/>
+        <Caret Line="203" Column="76" TopLine="191"/>
+      </Position25>
+      <Position26>
+        <Filename Value="umain.pas"/>
+        <Caret Line="205" Column="51" TopLine="190"/>
+      </Position26>
+      <Position27>
+        <Filename Value="udrawic.pas"/>
+        <Caret Line="457" Column="34" TopLine="444"/>
+      </Position27>
+      <Position28>
+        <Filename Value="uscanchain.pas"/>
+        <Caret Line="460" Column="1" TopLine="448"/>
+      </Position28>
+      <Position29>
+        <Filename Value="udrawic.pas"/>
+        <Caret Line="458" Column="22" TopLine="444"/>
+      </Position29>
+      <Position30>
+        <Filename Value="umain.pas"/>
+        <Caret Line="183" Column="20" TopLine="172"/>
+      </Position30>
+    </JumpHistory>
+  </ProjectOptions>
+  <CompilerOptions>
+    <Version Value="8"/>
+    <PathDelim Value="\"/>
+    <SearchPaths>
+      <UnitOutputDirectory Value="..\output\$(TargetCPU)-$(TargetOS)"/>
+    </SearchPaths>
+    <Parsing>
+      <SyntaxOptions>
+        <CStyleOperator Value="False"/>
+      </SyntaxOptions>
+    </Parsing>
+    <Linking>
+      <Options>
+        <Win32>
+          <GraphicApplication Value="True"/>
+        </Win32>
+      </Options>
+    </Linking>
+    <Other>
+      <CompilerPath Value="$(CompPath)"/>
+    </Other>
+  </CompilerOptions>
+  <Debugging>
+    <BreakPoints Count="1">
+      <Item1>
+        <Source Value="..\..\avrprog\general\src\htmlconvert.pas"/>
+        <Line Value="155"/>
+      </Item1>
+    </BreakPoints>
+  </Debugging>
+</CONFIG>

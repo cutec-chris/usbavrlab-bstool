@@ -1,0 +1,304 @@
+------------------------------------------------------------------------ 
+-- A T M E L   A V R   M I C R O C O N T R O L L E R S                -- 
+------------------------------------------------------------------------ 
+-- BSDL file 
+-- 
+-- File Name:     ATMEGA323.BSD
+-- File Revision: $Revision: 1.1 $
+-- Date created:  $Date: Tuesday, July 27, 2004 10:45:08 UTC $
+-- Support:       avr@atmel.com
+-- 
+-- Device:  ATmega323
+-- Package: 40 pin PDIP (default)
+--          44 pin TQFP
+--
+-- Visit http://www.atmel.com for a updated list of BSDL files.
+-- 
+------------------------------------------------------------------------ 
+-- Syntax and Semantics are checked against the IEEE 1149.1 standard. --
+-- The logical functioning of the standard Boundary-Scan instructions --
+-- and of the associated bypass, idcode and boundary-scan register    --
+-- described in this BSDL file has been verified against its related  --
+-- silicon by JTAG Technologies B.V.                                  --
+------------------------------------------------------------------------
+--
+------------------------------------------------------------------------ 
+--                       IMPORTANT NOTICE                             -- 
+--                                                                    -- 
+--   Copyright 2001 Atmel Corporation. All Rights Reserved.           -- 
+--                                                                    -- 
+--   Atmel assumes no responsibility or liability arising out         -- 
+--   this application or use of any information described herein      -- 
+--   except as expressly agreed to in writing by Atmel Corporation.   -- 
+--                                                                    -- 
+------------------------------------------------------------------------ 
+--  
+-- Notes:  
+-- 1. The RESET Boundary Scan cell receives an inverted signal, and is   
+--    therefore described as "internal".  
+-- 2. The behavior of the Oscillator Boundary Scan cells are dependant   
+--    on the Oscillator Fuse settings, and are therefore described as  
+--    "internal".  
+-- 3. The Boundary Scan cells for controlling the analog features ADC,   
+--    Comparator and pin pull-ups are described as "internal".  
+--    Note that this feature is in addition to the (digital) cells on   
+--    each pin. For information on accessing the pull-up function of the   
+--    pins, please read the device data sheet.  
+--  
+  
+entity ATmega323 is
+
+generic (PHYSICAL_PIN_MAP : string := " PDIP ")  ;
+
+port (    
+ RESET : linkage bit ;
+ VCC   : linkage bit ;
+ VCC1  : linkage bit ;
+ VCC2  : linkage bit ;
+ GND   : linkage bit ;
+ GND1  : linkage bit ;
+ GND2  : linkage bit ;
+ XTAL1 : linkage bit ;
+ XTAL2 : linkage bit ;
+ PA    : inout bit_vector(0 to 7) ;
+ PB    : inout bit_vector(0 to 7) ;
+ PC0   : inout bit ;
+ PC1   : inout bit ;
+ TCK   : in bit ;
+ TMS   : in bit ;
+ TDO   : out bit ;
+ TDI   : in bit ;
+ PC6   : inout bit ;
+ PC7   : inout bit ;
+ PD    : inout bit_vector(0 to 7) ;
+ AREF  : linkage bit ;
+ AGND  : linkage bit ;
+ AVCC  : linkage bit 
+ );    
+
+use STD_1149_1_1994.all    ;
+
+attribute COMPONENT_CONFORMANCE of ATmega323 : entity is  
+" STD_1149_1_1993 ";   
+
+attribute PIN_MAP of ATmega323 : entity is PHYSICAL_PIN_MAP ;
+
+constant PDIP : PIN_MAP_STRING:=  
+" RESET : 9 , " &
+" VCC   : 10 , " &
+" GND   : 11 , " &
+" XTAL1 : 13 , " &
+" XTAL2 : 12 , " &
+" PA    : (40,39,38,37,36,35,34,33) , " &
+" PB    : (1,2,3,4,5,6,7,8) , " &
+" PC0   : 22 , " &
+" PC1   : 23 , " &
+" TCK   : 24 , " &
+" TMS   : 25 , " &
+" TDO   : 26 , " &
+" TDI   : 27 , " &
+" PC6   : 28 , " &
+" PC7   : 29 , " &
+" PD    : (14,15,16,17,18,19,20,21) , " &
+" AREF  : 32 , " &
+" AGND  : 31 , " &
+" AVCC  : 30 " ;
+
+constant TQFP : PIN_MAP_STRING:=  
+" RESET : 4 , " &
+" VCC   : 5 , " &
+" VCC1  : 17 , " &
+" VCC2  : 38 , " &
+" GND   : 6 , " &
+" GND1  : 18 , " &
+" GND2  : 39 , " &
+" XTAL1 : 8 , " &
+" XTAL2 : 7 , " &
+" PA    : (37,36,35,34,33,32,31,30) , " &
+" PB    : (40,41,42,43,44,1,2,3) , " &
+" PC0   : 19 , " &
+" PC1   : 20 , " &
+" TCK   : 21 , " &
+" TMS   : 22 , " &
+" TDO   : 23 , " &
+" TDI   : 24 , " &
+" PC6   : 25 , " &
+" PC7   : 26 , " &
+" PD    : (9,10,11,12,13,14,15,16) , " &
+" AREF  : 29 , " &
+" AGND  : 28 , " &
+" AVCC  : 27 " ;
+
+attribute TAP_SCAN_IN of TDI : signal is true ;
+attribute TAP_SCAN_OUT of TDO : signal is true ;
+attribute TAP_SCAN_MODE of TMS : signal is true ;
+attribute TAP_SCAN_CLOCK of TCK : signal is (8.0e6, BOTH) ;
+
+attribute INSTRUCTION_LENGTH of ATmega323 : entity is 4 ;
+      
+attribute INSTRUCTION_OPCODE of ATmega323 : entity is  
+" EXTEST    ( 0000 )," & 
+" IDCODE    ( 0001 )," & 
+" SAMPLE    ( 0010 )," & 
+" PRIVATE0  ( 1000 )," & 
+" PRIVATE1  ( 1001 )," & 
+" PRIVATE2  ( 1010 )," & 
+" PRIVATE3  ( 1011 )," & 
+" AVR_RESET ( 1100 )," & 
+" BYPASS    ( 1111 )" ; 
+
+attribute INSTRUCTION_CAPTURE of ATmega323 : entity is " 0001 ";
+      
+attribute INSTRUCTION_PRIVATE of ATmega323 : entity is  
+" PRIVATE0 ," &   
+" PRIVATE1 ," &   
+" PRIVATE2 ," &   
+" PRIVATE3 " ;   
+      
+attribute IDCODE_REGISTER of ATmega323 : entity is  
+ "0000" &    
+ "1001010100000001" &    
+ "00000011111" &    
+ "1" ;    
+
+attribute REGISTER_ACCESS of ATmega323 : entity is             
+" BOUNDARY ( AVR_RESET )" ;            
+
+attribute BOUNDARY_LENGTH of ATmega323 : entity is 132 ;           
+                 
+attribute BOUNDARY_REGISTER of ATmega323 : entity is             
+-- num  cell  port  func  safe  [ccell  dis  rslt]  
+" 131 ( BC_1 , * , internal , 1       )," &
+" 130 ( BC_1 , * , internal , 0       )," &
+" 129 ( BC_1 , * , internal , 0       )," &
+" 128 ( BC_1 , * , internal , 0       )," &
+" 127 ( BC_1 , * , internal , 0       )," &
+" 126 ( BC_1 , * , internal , 0       )," &
+" 125 ( BC_1 , * , internal , 0       )," &
+" 124 ( BC_1 , * , internal , 0       )," &
+" 123 ( BC_1 , * , internal , 0       )," &
+" 122 ( BC_1 , * , internal , 0       )," &
+" 121 ( BC_1 , * , internal , 0       )," &
+" 120 ( BC_1 , * , internal , 1       )," &
+" 119 ( BC_1 , * , internal , 0       )," &
+" 118 ( BC_1 , * , internal , 0       )," &
+" 117 ( BC_1 , * , internal , 0       )," &
+" 116 ( BC_1 , * , internal , 0       )," &
+" 115 ( BC_1 , * , internal , 0       )," &
+" 114 ( BC_1 , * , internal , 0       )," &
+" 113 ( BC_1 , * , internal , 0       )," &
+" 112 ( BC_1 , * , internal , 0       )," &
+" 111 ( BC_1 , * , internal , 0       )," &
+" 110 ( BC_1 , * , internal , 1       )," &
+" 109 ( BC_1 , * , internal , 0       )," &
+" 108 ( BC_1 , * , internal , 0       )," &
+" 107 ( BC_1 , * , internal , 0       )," &
+" 106 ( BC_1 , * , internal , 1       )," &
+" 105 ( BC_1 , * , internal , 0       )," &
+" 104 ( BC_1 , * , internal , 0       )," &
+" 103 ( BC_1 , * , internal , 0       )," &
+" 102 ( BC_1 , * , internal , 0       )," &
+" 101 ( BC_1 , * , internal , 0       )," &
+" 100 ( BC_1 , * , internal , 0       )," &
+" 99 ( BC_1 , * , internal , 0       )," &
+" 98 ( BC_1 , * , internal , 0       )," &
+" 97 ( BC_1 , * , internal , 1       )," &
+" 96 ( BC_1 , * , internal , 0       )," &
+" 95 ( BC_1 , * , internal , 0       )," &
+" 94 ( BC_1 , * , internal , 0       )," &
+" 93 ( BC_1 , * , internal , 1       )," &
+" 92 ( BC_1 , * , internal , 1       )," &
+" 91 ( BC_1 , * , internal , 0       )," &
+" 90 ( BC_1 , * , internal , 0       )," &
+" 89 ( BC_1 , * , internal , 0       )," &
+" 88 ( BC_7 , PB(0) , bidir , X , 87 , 0 , Z )," &
+" 87 ( BC_1 , * , control , 0       )," &
+" 86 ( BC_1 , * , internal , 1       )," &
+" 85 ( BC_7 , PB(1) , bidir , X , 84 , 0 , Z )," &
+" 84 ( BC_1 , * , control , 0       )," &
+" 83 ( BC_1 , * , internal , 1       )," &
+" 82 ( BC_7 , PB(2) , bidir , X , 81 , 0 , Z )," &
+" 81 ( BC_1 , * , control , 0       )," &
+" 80 ( BC_1 , * , internal , 1       )," &
+" 79 ( BC_7 , PB(3) , bidir , X , 78 , 0 , Z )," &
+" 78 ( BC_1 , * , control , 0       )," &
+" 77 ( BC_1 , * , internal , 1       )," &
+" 76 ( BC_7 , PB(4) , bidir , X , 75 , 0 , Z )," &
+" 75 ( BC_1 , * , control , 0       )," &
+" 74 ( BC_1 , * , internal , 1       )," &
+" 73 ( BC_7 , PB(5) , bidir , X , 72 , 0 , Z )," &
+" 72 ( BC_1 , * , control , 0       )," &
+" 71 ( BC_1 , * , internal , 1       )," &
+" 70 ( BC_7 , PB(6) , bidir , X , 69 , 0 , Z )," &
+" 69 ( BC_1 , * , control , 0       )," &
+" 68 ( BC_1 , * , internal , 1       )," &
+" 67 ( BC_7 , PB(7) , bidir , X , 66 , 0 , Z )," &
+" 66 ( BC_1 , * , control , 0       )," &
+" 65 ( BC_1 , * , internal , 1       )," &
+" 64 ( BC_4 , * , internal , X       )," &
+" 63 ( BC_4 , * , internal , X       )," &
+" 62 ( BC_4 , * , internal , X       )," &
+" 61 ( BC_4 , * , internal , X       )," &
+" 60 ( BC_4 , * , internal , X       )," &
+" 59 ( BC_7 , PD(0) , bidir , X , 58 , 0 , Z )," &
+" 58 ( BC_1 , * , control , 0       )," &
+" 57 ( BC_1 , * , internal , 1       )," &
+" 56 ( BC_7 , PD(1) , bidir , X , 55 , 0 , Z )," &
+" 55 ( BC_1 , * , control , 0       )," &
+" 54 ( BC_1 , * , internal , 1       )," &
+" 53 ( BC_7 , PD(2) , bidir , X , 52 , 0 , Z )," &
+" 52 ( BC_1 , * , control , 0       )," &
+" 51 ( BC_1 , * , internal , 1       )," &
+" 50 ( BC_7 , PD(3) , bidir , X , 49 , 0 , Z )," &
+" 49 ( BC_1 , * , control , 0       )," &
+" 48 ( BC_1 , * , internal , 1       )," &
+" 47 ( BC_7 , PD(4) , bidir , X , 46 , 0 , Z )," &
+" 46 ( BC_1 , * , control , 0       )," &
+" 45 ( BC_1 , * , internal , 1       )," &
+" 44 ( BC_7 , PD(5) , bidir , X , 43 , 0 , Z )," &
+" 43 ( BC_1 , * , control , 0       )," &
+" 42 ( BC_1 , * , internal , 1       )," &
+" 41 ( BC_7 , PD(6) , bidir , X , 40 , 0 , Z )," &
+" 40 ( BC_1 , * , control , 0       )," &
+" 39 ( BC_1 , * , internal , 1       )," &
+" 38 ( BC_7 , PD(7) , bidir , X , 37 , 0 , Z )," &
+" 37 ( BC_1 , * , control , 0       )," &
+" 36 ( BC_1 , * , internal , 1       )," &
+" 35 ( BC_7 , PC0 , bidir , X , 34 , 0 , Z )," &
+" 34 ( BC_1 , * , control , 0       )," &
+" 33 ( BC_1 , * , internal , 1       )," &
+" 32 ( BC_7 , PC1 , bidir , X , 31 , 0 , Z )," &
+" 31 ( BC_1 , * , control , 0       )," &
+" 30 ( BC_1 , * , internal , 1       )," &
+" 29 ( BC_7 , PC6 , bidir , X , 28 , 0 , Z )," &
+" 28 ( BC_1 , * , control , 0       )," &
+" 27 ( BC_1 , * , internal , 1       )," &
+" 26 ( BC_7 , PC7 , bidir , X , 25 , 0 , Z )," &
+" 25 ( BC_1 , * , control , 0       )," &
+" 24 ( BC_1 , * , internal , 1       )," &
+" 23 ( BC_7 , PA(7) , bidir , X , 22 , 0 , Z )," &
+" 22 ( BC_1 , * , control , 0       )," &
+" 21 ( BC_1 , * , internal , 1       )," &
+" 20 ( BC_7 , PA(6) , bidir , X , 19 , 0 , Z )," &
+" 19 ( BC_1 , * , control , 0       )," &
+" 18 ( BC_1 , * , internal , 1       )," &
+" 17 ( BC_7 , PA(5) , bidir , X , 16 , 0 , Z )," &
+" 16 ( BC_1 , * , control , 0       )," &
+" 15 ( BC_1 , * , internal , 1       )," &
+" 14 ( BC_7 , PA(4) , bidir , X , 13 , 0 , Z )," &
+" 13 ( BC_1 , * , control , 0       )," &
+" 12 ( BC_1 , * , internal , 1       )," &
+" 11 ( BC_7 , PA(3) , bidir , X , 10 , 0 , Z )," &
+" 10 ( BC_1 , * , control , 0       )," &
+" 9 ( BC_1 , * , internal , 1       )," &
+" 8 ( BC_7 , PA(2) , bidir , X , 7 , 0 , Z )," &
+" 7 ( BC_1 , * , control , 0       )," &
+" 6 ( BC_1 , * , internal , 1       )," &
+" 5 ( BC_7 , PA(1) , bidir , X , 4 , 0 , Z )," &
+" 4 ( BC_1 , * , control , 0       )," &
+" 3 ( BC_1 , * , internal , 1       )," &
+" 2 ( BC_7 , PA(0) , bidir , X , 1 , 0 , Z )," &
+" 1 ( BC_1 , * , control , 0       )," &
+" 0 ( BC_1 , * , internal , 1       )" ;             
+
+end ATmega323 ;               

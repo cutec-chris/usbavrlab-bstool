@@ -1,0 +1,64 @@
+msgid ""
+msgstr "Content-Type: text/plain; charset=UTF-8"
+
+#: TFMAIN.ACINFO.CAPTION
+msgid "Info"
+msgstr ""
+
+#: TFMAIN.CAPTION
+msgid "USB AVR Lab Boundary Scan Tool"
+msgstr ""
+
+#: TFMAIN.LABEL1.CAPTION
+msgid "Wählen Sie ein Interface aus der Liste oder schließen Sie ein USB AVR Lab mit der JTAG Firmware an."
+msgstr ""
+
+#: TFMAIN.MILANGUAGE.CAPTION
+msgid "Sprache"
+msgstr ""
+
+#: umain.strerrorconnectingtodevice
+msgid "Fehler beim verbinden zum Gerät"
+msgstr ""
+
+#: umain.strinfo
+msgid ""
+"www:  http://www.ullihome.de\n"
+"mail: christian@ullihome.de\n"
+"\n"
+"Lizenz:\n"
+"Die Software und ihre Dokumentation wird wie sie ist zur\n"
+"Verfuegung gestellt. Da Fehlfunktionen auch bei ausfuehrlich\n"
+"getesteter Software durch die Vielzahl an verschiedenen\n"
+"Rechnerkonfigurationen niemals ausgeschlossen werden koennen,\n"
+"uebernimmt der Autor keinerlei Haftung fuer jedwede Folgeschaeden,\n"
+"die sich durch direkten oder indirekten Einsatz der Software\n"
+"oder der Dokumentation ergeben. Uneingeschraenkt ausgeschlossen\n"
+"ist vor allem die Haftung fuer Schaeden aus entgangenem Gewinn,\n"
+"Betriebsunterbrechung, Verlust von Informationen und Daten und\n"
+"Schaeden an anderer Software, auch wenn diese dem Autor bekannt\n"
+"sein sollten. Ausschliesslich der Benutzer haftet fuer Folgen der\n"
+"Benutzung dieser Software.\n"
+"\n"
+"erstellt mit Freepascal + Lazarus\n"
+"http://www.freepascal.org, http://lazarus.freepascal.org\n"
+"Iconset von:\n"
+"http://www.famfamfam.com/lab/icons/silk/\n"
+msgstr ""
+
+#: uscanchain.strunknown
+msgid "Unbekannt"
+msgstr ""
+
+#: uscanchain.strunknowncelltype
+msgid "Unkebannter Boundary Scan Cell Type %s"
+msgstr ""
+
+#: uscanchain.strunknownic
+msgid "Unbekanntes IC Herst.:%.2x Part.: %.4x Version: %.1x"
+msgstr ""
+
+#: uscanchain.strunknownrslttype
+msgid "Unkebannter Boundary Scan Rslt Typ %s"
+msgstr ""
+

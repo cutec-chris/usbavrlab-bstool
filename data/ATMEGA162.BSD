@@ -1,0 +1,275 @@
+------------------------------------------------------------------------                                  
+-- A T M E L   A V R   M I C R O C O N T R O L L E R S                --                                  
+------------------------------------------------------------------------                                  
+-- BSDL file                                  
+--                                          
+-- File Name:     ATMEGA162.BSD                               
+-- File Revision: 1.2                               
+-- Date created:  2004-10-26
+-- Revision date: 2008-06-09                                
+-- Created by:    Atmel Corporation                               
+-- Support:       avr@atmel.com                               
+--                                  
+-- Device:        ATmega162                               
+--                rev H                               
+-- Package:       40 pin PDIP                               
+--                44 pin TQFP  (default)                                
+--                44 pin MLF                                
+--                                          
+-- Visit http://www.atmel.com for a updated list of BSDL files.                                 
+--                                          
+------------------------------------------------------------------------                                  
+-- Syntax and Semantics are checked against the IEEE 1149.1 standard. --                                  
+-- The logical functioning of the standard Boundary-Scan instructions --                                  
+-- and of the associated bypass, idcode and boundary-scan register    --                                  
+-- described in this BSDL file has been verified against its related  --                                  
+-- silicon by JTAG Technologies B.V.                                  --                                  
+------------------------------------------------------------------------                                  
+--                                  
+-- Notes:                                 
+-- 1. The behavior of the Oscillator Boundary Scan cells are dependant                                  
+--    on the Oscillator Fuse settings, and are therefore described as                                 
+--    "internal".                                 
+-- 2. The Boundary Scan cells for controlling the analog features ADC,                                  
+--    Comparator and pin pull-ups are described as "internal".                                  
+--    Note that this feature is in addition to the (digital) cells on                                   
+--    each pin. For information on accessing the pull-up function of the                                  
+--    pins, please read the device data sheet.                                  
+--                                  
+                                  
+entity  ATmega162 is                              
+
+generic (PHYSICAL_PIN_MAP : string := " TQFP  ")    ;                       
+
+port  (                               
+  RESET : in  bit ;                       
+  VCC   : linkage bit ;                       
+  VCC1  : linkage bit ;                       
+  VCC2  : linkage bit ;                       
+  GND   : linkage bit ;                       
+  GND1  : linkage bit ;
+  GND2  : linkage bit ;
+  XTAL1 : linkage bit ;
+  XTAL2 : linkage bit ;
+  PA    : inout bit_vector(0 to 7)  ;
+  PB    : inout bit_vector(0 to 7)  ;
+  PC    : inout bit_vector(0 to 3)  ;
+  TCK   : in  bit ;
+  TMS   : in  bit ;
+  TDO   : out bit ;
+  TDI   : in  bit ;
+  PD    : inout bit_vector(0 to 7)  ;
+  PE    : inout bit_vector(0 to 2)  
+  );        
+
+use STD_1149_1_1994.all       ;
+
+attribute COMPONENT_CONFORMANCE of  ATmega162 : entity is   
+" STD_1149_1_1993 ";      
+
+attribute PIN_MAP of  ATmega162 : entity is PHYSICAL_PIN_MAP  ;
+          
+constant  PDIP  : PIN_MAP_STRING:=    
+" RESET : 9 , " &
+" VCC   : 40  , " &
+" GND   : 20  , " &
+" XTAL1 : 19  , " &
+" XTAL2 : 18  , " &
+" PA    : (39,38,37,36,35,34,33,32) , " &
+" PB    : (1,2,3,4,5,6,7,8) , " &
+" PC    : (21,22,23,24) , " &
+" TCK   : 25  , " &
+" TMS   : 26  , " &
+" TDO   : 27  , " &
+" TDI   : 28  , " &
+" PD    : (10,11,12,13,14,15,16,17) , " &
+" PE    : (31,30,29)  " ;
+
+constant  TQFP  : PIN_MAP_STRING:=    
+" RESET : 4 , " &
+" VCC   : 6 , " &
+" VCC1  : 17  , " &
+" VCC2  : 38  , " &
+" GND   : 16  , " &
+" GND1  : 28  , " &
+" GND2  : 39  , " &
+" XTAL1 : 15  , " &
+" XTAL2 : 14  , " &
+" PA    : (37,36,35,34,33,32,31,30) , " &
+" PB    : (40,41,42,43,44,1,2,3)  , " &
+" PC    : (18,19,20,21) , " &
+" TCK   : 22  , " &
+" TMS   : 23  , " &
+" TDO   : 24  , " &
+" TDI   : 25  , " &
+" PD    : (5,7,8,9,10,11,12,13) , " &
+" PE    : (29,27,26)  " ;
+
+constant  MLF : PIN_MAP_STRING:=    
+" RESET : 4 , " &
+" VCC   : 6 , " &
+" VCC1  : 17  , " &
+" VCC2  : 38  , " &
+" GND   : 16  , " &
+" GND1  : 28  , " & 
+" GND2  : 39  , " & 
+" XTAL1 : 15  , " & 
+" XTAL2 : 14  , " & 
+" PA    : (37,36,35,34,33,32,31,30) , " & 
+" PB    : (40,41,42,43,44,1,2,3)  , " & 
+" PC    : (18,19,20,21) , " & 
+" TCK   : 22  , " & 
+" TMS   : 23  , " & 
+" TDO   : 24  , " & 
+" TDI   : 25  , " & 
+" PD    : (5,7,8,9,10,11,12,13) , " & 
+" PE    : (29,27,26)  " ; 
+
+attribute TAP_SCAN_IN of  TDI : signal is true  ;
+attribute TAP_SCAN_OUT  of  TDO : signal is true  ;
+attribute TAP_SCAN_MODE of  TMS : signal is true  ;
+attribute TAP_SCAN_CLOCK  of  TCK : signal is (8.0e6, BOTH) ;
+
+attribute INSTRUCTION_LENGTH  of  ATmega162 : entity is 4 ;
+            
+attribute INSTRUCTION_OPCODE  of  ATmega162 : entity is   
+" EXTEST    ( 0000  )," & 
+" IDCODE    ( 0001  )," & 
+" SAMPLE    ( 0010  )," & 
+" PRIVATE0  ( 1000  )," & 
+" PRIVATE1  ( 1001  )," & 
+" PRIVATE2  ( 1010  )," & 
+" PRIVATE3  ( 1011  )," & 
+" AVR_RESET ( 1100  )," & 
+" BYPASS    ( 1111  )"  ; 
+
+attribute INSTRUCTION_CAPTURE of  ATmega162 : entity is " 0001  ";                      
+                                  
+attribute INSTRUCTION_PRIVATE of  ATmega162 : entity is                         
+" PRIVATE0  ,"  &                           
+" PRIVATE1  ,"  &                           
+" PRIVATE2  ,"  &                           
+" PRIVATE3  " ;                           
+                                  
+attribute IDCODE_REGISTER of  ATmega162 : entity is                         
+  "0111"  &                             
+  "1001010000000100"  &                             
+  "00000011111" &                             
+  "1" ;                             
+
+attribute REGISTER_ACCESS of  ATmega162 : entity is                         
+" BOUNDARY  ( AVR_RESET )"  ;                       
+
+attribute BOUNDARY_LENGTH of  ATmega162 : entity is 106 ;                     
+                                  
+attribute BOUNDARY_REGISTER of  ATmega162 : entity is                         
+--  num   cell    port    func    safe    [ccell    dis   rslt]   
+" 105 ( BC_1  , * , internal  , 1             )," &
+" 104 ( BC_1  , * , internal  , 0             )," &
+" 103 ( BC_1  , * , internal  , 0             )," &
+" 102 ( BC_7  , PB(0) , bidir , X , 101 , 0 , Z )," &
+" 101 ( BC_1  , * , control , 0             )," &
+" 100 ( BC_1  , * , internal  , 0             )," &
+" 99  ( BC_7  , PB(1) , bidir , X , 98  , 0 , Z )," &
+" 98  ( BC_1  , * , control , 0             )," &
+" 97  ( BC_1  , * , internal  , 0             )," &
+" 96  ( BC_7  , PB(2) , bidir , X , 95  , 0 , Z )," &
+" 95  ( BC_1  , * , control , 0             )," &
+" 94  ( BC_1  , * , internal  , 0             )," &
+" 93  ( BC_7  , PB(3) , bidir , X , 92  , 0 , Z )," &
+" 92  ( BC_1  , * , control , 0             )," &
+" 91  ( BC_1  , * , internal  , 0             )," &
+" 90  ( BC_7  , PB(4) , bidir , X , 89  , 0 , Z )," &
+" 89  ( BC_1  , * , control , 0             )," &
+" 88  ( BC_1  , * , internal  , 0             )," &
+" 87  ( BC_7  , PB(5) , bidir , X , 86  , 0 , Z )," &
+" 86  ( BC_1  , * , control , 0             )," &
+" 85  ( BC_1  , * , internal  , 0             )," &
+" 84  ( BC_7  , PB(6) , bidir , X , 83  , 0 , Z )," &
+" 83  ( BC_1  , * , control , 0             )," &
+" 82  ( BC_1  , * , internal  , 0             )," &
+" 81  ( BC_7  , PB(7) , bidir , X , 80  , 0 , Z )," &
+" 80  ( BC_1  , * , control , 0             )," &
+" 79  ( BC_1  , * , internal  , 0             )," &
+" 78  ( BC_4  , RESET , observe_only  , X             )," &
+" 77  ( BC_4  , * , internal  , X             )," &
+" 76  ( BC_4  , * , internal  , X             )," &
+" 75  ( BC_1  , * , internal  , X             )," &
+" 74  ( BC_7  , PD(0) , bidir , X , 73  , 0 , Z )," &
+" 73  ( BC_1  , * , control , 0             )," &
+" 72  ( BC_1  , * , internal  , 0             )," &
+" 71  ( BC_7  , PD(1) , bidir , X , 70  , 0 , Z )," &
+" 70  ( BC_1  , * , control , 0             )," &
+" 69  ( BC_1  , * , internal  , 0             )," &
+" 68  ( BC_7  , PD(2) , bidir , X , 67  , 0 , Z )," &
+" 67  ( BC_1  , * , control , 0             )," &
+" 66  ( BC_1  , * , internal  , 0             )," &
+" 65  ( BC_7  , PD(3) , bidir , X , 64  , 0 , Z )," &
+" 64  ( BC_1  , * , control , 0             )," &
+" 63  ( BC_1  , * , internal  , 0             )," &
+" 62  ( BC_7  , PD(4) , bidir , X , 61  , 0 , Z )," &
+" 61  ( BC_1  , * , control , 0             )," &
+" 60  ( BC_1  , * , internal  , 0             )," &
+" 59  ( BC_7  , PD(5) , bidir , X , 58  , 0 , Z )," &
+" 58  ( BC_1  , * , control , 0             )," &
+" 57  ( BC_1  , * , internal  , 0             )," &
+" 56  ( BC_7  , PD(6) , bidir , X , 55  , 0 , Z )," &
+" 55  ( BC_1  , * , control , 0             )," &
+" 54  ( BC_1  , * , internal  , 0             )," &
+" 53  ( BC_7  , PD(7) , bidir , X , 52  , 0 , Z )," &
+" 52  ( BC_1  , * , control , 0             )," &
+" 51  ( BC_1  , * , internal  , 0             )," &
+" 50  ( BC_1  , * , internal  , X             )," &
+" 49  ( BC_1  , * , internal  , X             )," &
+" 48  ( BC_1  , * , internal  , X             )," &
+" 47  ( BC_4  , * , internal  , X             )," &
+" 46  ( BC_4  , * , internal  , X             )," &
+" 45  ( BC_4  , * , internal  , X             )," &
+" 44  ( BC_7  , PC(0) , bidir , X , 43  , 0 , Z )," &
+" 43  ( BC_1  , * , control , 0             )," &
+" 42  ( BC_1  , * , internal  , 0             )," &
+" 41  ( BC_7  , PC(1) , bidir , X , 40  , 0 , Z )," &
+" 40  ( BC_1  , * , control , 0             )," &
+" 39  ( BC_1  , * , internal  , 0             )," &
+" 38  ( BC_7  , PC(2) , bidir , X , 37  , 0 , Z )," &
+" 37  ( BC_1  , * , control , 0             )," &
+" 36  ( BC_1  , * , internal  , 0             )," &
+" 35  ( BC_7  , PC(3) , bidir , X , 34  , 0 , Z )," &
+" 34  ( BC_1  , * , control , 0             )," &
+" 33  ( BC_1  , * , internal  , 0             )," &
+" 32  ( BC_7  , PE(2) , bidir , X , 31  , 0 , Z )," &
+" 31  ( BC_1  , * , control , 0             )," &
+" 30  ( BC_1  , * , internal  , 0             )," &
+" 29  ( BC_7  , PE(1) , bidir , X , 28  , 0 , Z )," &
+" 28  ( BC_1  , * , control , 0             )," &
+" 27  ( BC_1  , * , internal  , 0             )," &
+" 26  ( BC_7  , PE(0) , bidir , X , 25  , 0 , Z )," &
+" 25  ( BC_1  , * , control , 0             )," &
+" 24  ( BC_1  , * , internal  , 0             )," &
+" 23  ( BC_7  , PA(7) , bidir , X , 22  , 0 , Z )," &
+" 22  ( BC_1  , * , control , 0             )," &
+" 21  ( BC_1  , * , internal  , 0             )," &
+" 20  ( BC_7  , PA(6) , bidir , X , 19  , 0 , Z )," &
+" 19  ( BC_1  , * , control , 0             )," &
+" 18  ( BC_1  , * , internal  , 0             )," &
+" 17  ( BC_7  , PA(5) , bidir , X , 16  , 0 , Z )," &
+" 16  ( BC_1  , * , control , 0             )," &
+" 15  ( BC_1  , * , internal  , 0             )," &
+" 14  ( BC_7  , PA(4) , bidir , X , 13  , 0 , Z )," &
+" 13  ( BC_1  , * , control , 0             )," &
+" 12  ( BC_1  , * , internal  , 0             )," &
+" 11  ( BC_7  , PA(3) , bidir , X , 10  , 0 , Z )," &
+" 10  ( BC_1  , * , control , 0             )," &
+" 9 ( BC_1  , * , internal  , 0             )," &
+" 8 ( BC_7  , PA(2) , bidir , X , 7 , 0 , Z )," &
+" 7 ( BC_1  , * , control , 0             )," &
+" 6 ( BC_1  , * , internal  , 0             )," &
+" 5 ( BC_7  , PA(1) , bidir , X , 4 , 0 , Z )," &
+" 4 ( BC_1  , * , control , 0             )," &
+" 3 ( BC_1  , * , internal  , 0             )," &
+" 2 ( BC_7  , PA(0) , bidir , X , 1 , 0 , Z )," &
+" 1 ( BC_1  , * , control , 0             )," &
+" 0 ( BC_1  , * , internal  , 0             )"  ;
+
+
+end ATmega162 ;

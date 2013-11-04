@@ -1,0 +1,72 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: Christian Ulrich <christian@ullihome.de>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: TFMAIN.ACINFO.CAPTION
+msgid "Info"
+msgstr "Info"
+
+#: TFMAIN.CAPTION
+msgid "USB AVR Lab Boundary Scan Tool"
+msgstr "USB AVR Lab Boundary Scan Tool"
+
+#: TFMAIN.LABEL1.CAPTION
+msgid "Wählen Sie ein Interface aus der Liste oder schließen Sie ein USB AVR Lab mit der JTAG Firmware an."
+msgstr "Select an interface from the list or connect an USB AVR Lab with JTAG Firmware."
+
+#: TFMAIN.MILANGUAGE.CAPTION
+msgid "Sprache"
+msgstr "Language"
+
+#: umain.strerrorconnectingtodevice
+msgid "Fehler beim verbinden zum Gerät"
+msgstr "Error connecting to interface."
+
+#: umain.strinfo
+msgid ""
+"www:  http://www.ullihome.de\n"
+"mail: christian@ullihome.de\n"
+"\n"
+"Lizenz:\n"
+"Die Software und ihre Dokumentation wird wie sie ist zur\n"
+"Verfuegung gestellt. Da Fehlfunktionen auch bei ausfuehrlich\n"
+"getesteter Software durch die Vielzahl an verschiedenen\n"
+"Rechnerkonfigurationen niemals ausgeschlossen werden koennen,\n"
+"uebernimmt der Autor keinerlei Haftung fuer jedwede Folgeschaeden,\n"
+"die sich durch direkten oder indirekten Einsatz der Software\n"
+"oder der Dokumentation ergeben. Uneingeschraenkt ausgeschlossen\n"
+"ist vor allem die Haftung fuer Schaeden aus entgangenem Gewinn,\n"
+"Betriebsunterbrechung, Verlust von Informationen und Daten und\n"
+"Schaeden an anderer Software, auch wenn diese dem Autor bekannt\n"
+"sein sollten. Ausschliesslich der Benutzer haftet fuer Folgen der\n"
+"Benutzung dieser Software.\n"
+"\n"
+"erstellt mit Freepascal + Lazarus\n"
+"http://www.freepascal.org, http://lazarus.freepascal.org\n"
+"Iconset von:\n"
+"http://www.famfamfam.com/lab/icons/silk/\n"
+msgstr ""
+
+#: uscanchain.strunknown
+msgid "Unbekannt"
+msgstr "Unknown"
+
+#: uscanchain.strunknowncelltype
+msgid "Unkebannter Boundary Scan Cell Type %s"
+msgstr "Unknown Boundary Scan Cell type: %s"
+
+#: uscanchain.strunknownic
+msgid "Unbekanntes IC Herst.:%.2x Part.: %.4x Version: %.1x"
+msgstr "Unknown IC Vendor: %.2x Part: %.4x version: %.1x"
+
+#: uscanchain.strunknownrslttype
+msgid "Unkebannter Boundary Scan Rslt Typ %s"
+msgstr "Unknown Boundary Scan Rslt Typ %s"
+

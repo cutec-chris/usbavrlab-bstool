@@ -1,0 +1,276 @@
+------------------------------------------------------------------------																						
+-- A T M E L   A V R   M I C R O C O N T R O L L E R S                --																						
+------------------------------------------------------------------------																						
+-- BSDL file																						
+--         																						
+-- File Name:    	AT90USB647.BSD																					
+-- File Revision:	1.0																					
+-- Date created: 	2007-02-19																					
+-- Created by:   	Atmel Corporation																					
+-- Support:      	avr@atmel.com																					
+-- File Status:  	Released																					
+--																						
+-- Device:       	AT90USB647																					
+--               	rev A																					
+-- Package:      	64 pin TQFP (default)																					
+--               	64 pin QFN																					
+--               																						
+--         																						
+-- Visit http://www.atmel.com for a updated list of BSDL files.																						
+--         																						
+--																						
+------------------------------------------------------------------------																						
+-- Syntax and Semantics are checked against the IEEE 1149.1 standard. --																						
+-- The logical functioning of the standard Boundary-Scan instructions --																						
+-- and of the associated bypass, idcode and boundary-scan register    --																						
+-- described in this BSDL file has been verified against its related  --																						
+-- silicon by JTAG Technologies B.V.                                  --																						
+------------------------------------------------------------------------																						
+------------------------------------------------------------------------ 																						
+--                       IMPORTANT NOTICE                             -- 																						
+--                                                                    -- 																						
+--   Copyright 2002 Atmel Corporation. All Rights Reserved.           -- 																						
+--                                                                    -- 																						
+--   Atmel assumes no responsibility or liability arising out         -- 																						
+--   this application or use of any information described herein      -- 																						
+--   except as expressly agreed to in writing by Atmel Corporation.   -- 																						
+--                                                                    -- 																						
+------------------------------------------------------------------------ 																						
+--																						
+-- Notes:																						
+-- 1. The behavior of the Oscillator Boundary Scan cells are dependant 																						
+--    on the Oscillator Fuse settings, and are therefore described as																						
+--    "internal".																						
+-- 2. The Boundary Scan cells for controlling the analog features ADC, 																						
+--    Comparator and pin pull-ups are described as "internal".																						
+--    Note that this feature is in addition to the (digital) cells on 																						
+--    each pin. For information on accessing the pull-up function of the 																						
+--    pins, please read the device data sheet.																						
+--																						
+																						
+entity	AT90USB647	is																				
+																						
+generic	(PHYSICAL_PIN_MAP : string := "	TQFP	")		;																	
+																						
+port	(																					
+	RESET	:	in	bit	;																	
+	VCC  	:	linkage	bit	;																	
+	VCC1 	:	linkage	bit	;																	
+	GND  	:	linkage	bit	;																	
+	GND1 	:	linkage	bit	;																	
+	GND2 	:	linkage	bit	;																	
+	XTAL1	:	linkage	bit	;																	
+	XTAL2	:	linkage	bit	;																	
+	PA   	:	inout	bit_vector(0 to 7)	;																	
+	PB   	:	inout	bit_vector(0 to 7)	;																	
+	PC   	:	inout	bit_vector(0 to 7)	;																	
+	PD   	:	inout	bit_vector(0 to 7)	;																	
+	PE   	:	inout	bit_vector(0 to 7)	;																	
+	PF   	:	inout	bit_vector(0 to 3)	;																	
+	TCK  	:	in	bit	;																	
+	TMS  	:	in	bit	;																	
+	TDO  	:	out	bit	;																	
+	TDI  	:	in	bit	;																	
+	VBUS	:	linkage	bit	;																	
+	UCAP	:	linkage	bit	;																	
+	UGND	:	linkage	bit	;																	
+	DP	:	linkage	bit	;																	
+	DM	:	linkage	bit	;																	
+	UVCC	:	linkage	bit	;																	
+	AREF 	:	linkage	bit	;																	
+	AVCC 	:	linkage	bit																		
+	);																					
+																						
+use	STD_1149_1_1994.all				;																	
+																						
+attribute	COMPONENT_CONFORMANCE of	AT90USB647	: entity is																			
+"	STD_1149_1_1993	";																				
+																						
+attribute	PIN_MAP of	AT90USB647	: entity is	PHYSICAL_PIN_MAP	;																	
+																						
+constant	TQFP	:	PIN_MAP_STRING:=																			
+"	RESET	:	20	, "	&																	
+"	VCC  	:	21	, "	&																	
+"	VCC1 	:	52	, "	&																	
+"	GND  	:	22	, "	&																	
+"	GND1 	:	53	, "	&																	
+"	GND2 	:	63	, "	&																	
+"	XTAL1	:	24	, "	&																	
+"	XTAL2	:	23	, "	&																	
+"	PA   	:	(51,50,49,48,47,46,45,44)	, "	&																	
+"	PB   	:	(10,11,12,13,14,15,16,17)	, "	&																	
+"	PC   	:	(35,36,37,38,39,40,41,42)	, "	&																	
+"	PD   	:	(25,26,27,28,29,30,31,32)	, "	&																	
+"	PE   	:	(33,34,43,9,18,19,1,2)	, "	&																	
+"	PF   	:	(61,60,59,58)	, "	&																	
+"	TCK  	:	57	, "	&																	
+"	TMS  	:	56	, "	&																	
+"	TDO  	:	55	, "	&																	
+"	TDI  	:	54	, "	&																	
+"	VBUS	:	8	, "	&																	
+"	UCAP	:	7	, "	&																	
+"	UGND	:	6	, "	&																	
+"	DP	:	5	, "	&																	
+"	DM	:	4	, "	&																	
+"	UVCC	:	3	, "	&																	
+"	AREF 	:	62	, "	&																	
+"	AVCC 	:	64	"	;																	
+																						
+constant	QFN	:	PIN_MAP_STRING:=																			
+"	RESET	:	20	, "	&																	
+"	VCC  	:	21	, "	&																	
+"	VCC1 	:	52	, "	&																	
+"	GND  	:	22	, "	&																	
+"	GND1 	:	53	, "	&																	
+"	GND2 	:	63	, "	&																	
+"	XTAL1	:	24	, "	&																	
+"	XTAL2	:	23	, "	&																	
+"	PA   	:	(51,50,49,48,47,46,45,44)	, "	&																	
+"	PB   	:	(10,11,12,13,14,15,16,17)	, "	&																	
+"	PC   	:	(35,36,37,38,39,40,41,42)	, "	&																	
+"	PD   	:	(25,26,27,28,29,30,31,32)	, "	&																	
+"	PE   	:	(33,34,43,9,18,19,1,2)	, "	&																	
+"	PF   	:	(61,60,59,58)	, "	&																	
+"	TCK  	:	57	, "	&																	
+"	TMS  	:	56	, "	&																	
+"	TDO  	:	55	, "	&																	
+"	TDI  	:	54	, "	&																	
+"	VBUS	:	8	, "	&																	
+"	UCAP	:	7	, "	&																	
+"	UGND	:	6	, "	&																	
+"	DP	:	5	, "	&																	
+"	DM	:	4	, "	&																	
+"	UVCC	:	3	, "	&																	
+"	AREF 	:	62	, "	&																	
+"	AVCC 	:	64	"	;																	
+																						
+attribute	TAP_SCAN_IN	of	TDI	: signal is	true	;																
+attribute	TAP_SCAN_OUT	of	TDO	: signal is	true	;																
+attribute	TAP_SCAN_MODE	of	TMS	: signal is	true	;																
+attribute	TAP_SCAN_CLOCK	of	TCK	: signal is	(8.0e6, BOTH)	;																
+																						
+attribute	INSTRUCTION_LENGTH	of	AT90USB647	: entity is	4	;																
+																						
+attribute	INSTRUCTION_OPCODE	of	AT90USB647	: entity is																		
+"	EXTEST   	(	0000	),"	&																	
+"	IDCODE   	(	0001	),"	&																	
+"	SAMPLE   	(	0010	),"	&																	
+"	PRIVATE0 	(	1000	),"	&																	
+"	PRIVATE1 	(	1001	),"	&																	
+"	PRIVATE2 	(	1010	),"	&																	
+"	PRIVATE3 	(	1011	),"	&																	
+"	AVR_RESET	(	1100	),"	&																	
+"	BYPASS   	(	1111	)"	;																	
+																						
+attribute	INSTRUCTION_CAPTURE	of	AT90USB647	: entity is "	0001	";																
+																						
+attribute	INSTRUCTION_PRIVATE	of	AT90USB647	: entity is																		
+"	PRIVATE0	,"	&																			
+"	PRIVATE1	,"	&																			
+"	PRIVATE2	,"	&																			
+"	PRIVATE3	"	;																			
+																						
+attribute	IDCODE_REGISTER	of	AT90USB647	: entity is																		
+	"0000"	&																--	0x0			
+	"1001011010000010"	&																--	0x9782			
+	"00000011111"	&																--	0x01F			
+	"1"	;																				
+																						
+attribute	REGISTER_ACCESS	of	AT90USB647	: entity is																		
+"	BOUNDARY	(	AVR_RESET	)"	;																	
+																						
+attribute	BOUNDARY_LENGTH	of	AT90USB647	: entity is	89	;																
+																						
+attribute	BOUNDARY_REGISTER	of	AT90USB647	: entity is																		
+--	num		cell		port		func		safe		[ccell		dis		rslt]							
+"	88	(	BC_7	,	PE(6)	,	bidir	,	X	,	87	,	0	,	Z	),"	&	--	88	PE6.Data	E	6
+"	87	(	BC_1	,	*	,	control	,	0							),"	&	--	87	PE6.Control	E	
+"	86	(	BC_7	,	PE(7)	,	bidir	,	X	,	85	,	0	,	Z	),"	&	--	86	PE7.Data	E	7
+"	85	(	BC_1	,	*	,	control	,	0							),"	&	--	85	PE7.Control	E	
+"	84	(	BC_7	,	PE(3)	,	bidir	,	X	,	83	,	0	,	Z	),"	&	--	84	PE3.Data	E	3
+"	83	(	BC_1	,	*	,	control	,	0							),"	&	--	83	PE3.Control	E	
+"	82	(	BC_7	,	PB(0)	,	bidir	,	X	,	81	,	0	,	Z	),"	&	--	82	PB0.Data	B	0
+"	81	(	BC_1	,	*	,	control	,	0							),"	&	--	81	PB0.Control	B	
+"	80	(	BC_7	,	PB(1)	,	bidir	,	X	,	79	,	0	,	Z	),"	&	--	80	PB1.Data	B	1
+"	79	(	BC_1	,	*	,	control	,	0							),"	&	--	79	PB1.Control	B	
+"	78	(	BC_7	,	PB(2)	,	bidir	,	X	,	77	,	0	,	Z	),"	&	--	78	PB2.Data	B	2
+"	77	(	BC_1	,	*	,	control	,	0							),"	&	--	77	PB2.Control	B	
+"	76	(	BC_7	,	PB(3)	,	bidir	,	X	,	75	,	0	,	Z	),"	&	--	76	PB3.Data	B	3
+"	75	(	BC_1	,	*	,	control	,	0							),"	&	--	75	PB3.Control	B	
+"	74	(	BC_7	,	PB(4)	,	bidir	,	X	,	73	,	0	,	Z	),"	&	--	74	PB4.Data	B	4
+"	73	(	BC_1	,	*	,	control	,	0							),"	&	--	73	PB4.Control	B	
+"	72	(	BC_7	,	PB(5)	,	bidir	,	X	,	71	,	0	,	Z	),"	&	--	72	PB5.Data	B	5
+"	71	(	BC_1	,	*	,	control	,	0							),"	&	--	71	PB5.Control	B	
+"	70	(	BC_7	,	PB(6)	,	bidir	,	X	,	69	,	0	,	Z	),"	&	--	70	PB6.Data	B	6
+"	69	(	BC_1	,	*	,	control	,	0							),"	&	--	69	PB6.Control	B	
+"	68	(	BC_7	,	PB(7)	,	bidir	,	X	,	67	,	0	,	Z	),"	&	--	68	PB7.Data	B	7
+"	67	(	BC_1	,	*	,	control	,	0							),"	&	--	67	PB7.Control	B	
+"	66	(	BC_7	,	PE(4)	,	bidir	,	X	,	65	,	0	,	Z	),"	&	--	66	PE4.Data	E	4
+"	65	(	BC_1	,	*	,	control	,	0							),"	&	--	65	PE4.Control	E	
+"	64	(	BC_7	,	PE(5)	,	bidir	,	X	,	63	,	0	,	Z	),"	&	--	64	PE5.Data	E	5
+"	63	(	BC_1	,	*	,	control	,	0							),"	&	--	63	PE5.Control	E	
+"	62	(	BC_4	,	RESET	,	observe_only	,	X							),"	&	--	62	RSTT		
+"	61	(	BC_7	,	PD(0)	,	bidir	,	X	,	60	,	0	,	Z	),"	&	--	61	PD0.Data	D	0
+"	60	(	BC_1	,	*	,	control	,	0							),"	&	--	60	PD0.Control	D	
+"	59	(	BC_7	,	PD(1)	,	bidir	,	X	,	58	,	0	,	Z	),"	&	--	59	PD1.Data	D	1
+"	58	(	BC_1	,	*	,	control	,	0							),"	&	--	58	PD1.Control	D	
+"	57	(	BC_7	,	PD(2)	,	bidir	,	X	,	56	,	0	,	Z	),"	&	--	57	PD2.Data	D	2
+"	56	(	BC_1	,	*	,	control	,	0							),"	&	--	56	PD2.Control	D	
+"	55	(	BC_7	,	PD(3)	,	bidir	,	X	,	54	,	0	,	Z	),"	&	--	55	PD3.Data	D	3
+"	54	(	BC_1	,	*	,	control	,	0							),"	&	--	54	PD3.Control	D	
+"	53	(	BC_7	,	PD(4)	,	bidir	,	X	,	52	,	0	,	Z	),"	&	--	53	PD4.Data	D	4
+"	52	(	BC_1	,	*	,	control	,	0							),"	&	--	52	PD4.Control	D	
+"	51	(	BC_7	,	PD(5)	,	bidir	,	X	,	50	,	0	,	Z	),"	&	--	51	PD5.Data	D	5
+"	50	(	BC_1	,	*	,	control	,	0							),"	&	--	50	PD5.Control	D	
+"	49	(	BC_7	,	PD(6)	,	bidir	,	X	,	48	,	0	,	Z	),"	&	--	49	PD6.Data	D	6
+"	48	(	BC_1	,	*	,	control	,	0							),"	&	--	48	PD6.Control	D	
+"	47	(	BC_7	,	PD(7)	,	bidir	,	X	,	46	,	0	,	Z	),"	&	--	47	PD7.Data	D	7
+"	46	(	BC_1	,	*	,	control	,	0							),"	&	--	46	PD7.Control	D	
+"	45	(	BC_7	,	PE(0)	,	bidir	,	X	,	44	,	0	,	Z	),"	&	--	45	PE0.Data	E	0
+"	44	(	BC_1	,	*	,	control	,	0							),"	&	--	44	PE0.Control	E	
+"	43	(	BC_7	,	PE(1)	,	bidir	,	X	,	42	,	0	,	Z	),"	&	--	43	PE1.Data	E	1
+"	42	(	BC_1	,	*	,	control	,	0							),"	&	--	42	PE1.Control	E	
+"	41	(	BC_7	,	PC(0)	,	bidir	,	X	,	40	,	0	,	Z	),"	&	--	41	PC0.Data	C	0
+"	40	(	BC_1	,	*	,	control	,	0							),"	&	--	40	PC0.Control	C	
+"	39	(	BC_7	,	PC(1)	,	bidir	,	X	,	38	,	0	,	Z	),"	&	--	39	PC1.Data	C	1
+"	38	(	BC_1	,	*	,	control	,	0							),"	&	--	38	PC1.Control	C	
+"	37	(	BC_7	,	PC(2)	,	bidir	,	X	,	36	,	0	,	Z	),"	&	--	37	PC2.Data	C	2
+"	36	(	BC_1	,	*	,	control	,	0							),"	&	--	36	PC2.Control	C	
+"	35	(	BC_7	,	PC(3)	,	bidir	,	X	,	34	,	0	,	Z	),"	&	--	35	PC3.Data	C	3
+"	34	(	BC_1	,	*	,	control	,	0							),"	&	--	34	PC3.Control	C	
+"	33	(	BC_7	,	PC(4)	,	bidir	,	X	,	32	,	0	,	Z	),"	&	--	33	PC4.Data	C	4
+"	32	(	BC_1	,	*	,	control	,	0							),"	&	--	32	PC4.Control	C	
+"	31	(	BC_7	,	PC(5)	,	bidir	,	X	,	30	,	0	,	Z	),"	&	--	31	PC5.Data	C	5
+"	30	(	BC_1	,	*	,	control	,	0							),"	&	--	30	PC5.Control	C	
+"	29	(	BC_7	,	PC(6)	,	bidir	,	X	,	28	,	0	,	Z	),"	&	--	29	PC6.Data	C	6
+"	28	(	BC_1	,	*	,	control	,	0							),"	&	--	28	PC6.Control	C	
+"	27	(	BC_7	,	PC(7)	,	bidir	,	X	,	26	,	0	,	Z	),"	&	--	27	PC7.Data	C	7
+"	26	(	BC_1	,	*	,	control	,	0							),"	&	--	26	PC7.Control	C	
+"	25	(	BC_7	,	PE(2)	,	bidir	,	X	,	24	,	0	,	Z	),"	&	--	25	PE2.Data	E	2
+"	24	(	BC_1	,	*	,	control	,	0							),"	&	--	24	PE2.Control	E	
+"	23	(	BC_7	,	PA(7)	,	bidir	,	X	,	22	,	0	,	Z	),"	&	--	23	PA7.Data	A	7
+"	22	(	BC_1	,	*	,	control	,	0							),"	&	--	22	PA7.Control	A	
+"	21	(	BC_7	,	PA(6)	,	bidir	,	X	,	20	,	0	,	Z	),"	&	--	21	PA6.Data	A	6
+"	20	(	BC_1	,	*	,	control	,	0							),"	&	--	20	PA6.Control	A	
+"	19	(	BC_7	,	PA(5)	,	bidir	,	X	,	18	,	0	,	Z	),"	&	--	19	PA5.Data	A	5
+"	18	(	BC_1	,	*	,	control	,	0							),"	&	--	18	PA5.Control	A	
+"	17	(	BC_7	,	PA(4)	,	bidir	,	X	,	16	,	0	,	Z	),"	&	--	17	PA4.Data	A	4
+"	16	(	BC_1	,	*	,	control	,	0							),"	&	--	16	PA4.Control	A	
+"	15	(	BC_7	,	PA(3)	,	bidir	,	X	,	14	,	0	,	Z	),"	&	--	15	PA3.Data	A	3
+"	14	(	BC_1	,	*	,	control	,	0							),"	&	--	14	PA3.Control	A	
+"	13	(	BC_7	,	PA(2)	,	bidir	,	X	,	12	,	0	,	Z	),"	&	--	13	PA2.Data	A	2
+"	12	(	BC_1	,	*	,	control	,	0							),"	&	--	12	PA2.Control	A	
+"	11	(	BC_7	,	PA(1)	,	bidir	,	X	,	10	,	0	,	Z	),"	&	--	11	PA1.Data	A	1
+"	10	(	BC_1	,	*	,	control	,	0							),"	&	--	10	PA1.Control	A	
+"	9	(	BC_7	,	PA(0)	,	bidir	,	X	,	8	,	0	,	Z	),"	&	--	9	PA0.Data	A	0
+"	8	(	BC_1	,	*	,	control	,	0							),"	&	--	8	PA0.Control	A	
+"	7	(	BC_7	,	PF(3)	,	bidir	,	X	,	6	,	0	,	Z	),"	&	--	7	PF3.Data	F	3
+"	6	(	BC_1	,	*	,	control	,	0							),"	&	--	6	PF3.Control	F	
+"	5	(	BC_7	,	PF(2)	,	bidir	,	X	,	4	,	0	,	Z	),"	&	--	5	PF2.Data	F	2
+"	4	(	BC_1	,	*	,	control	,	0							),"	&	--	4	PF2.Control	F	
+"	3	(	BC_7	,	PF(1)	,	bidir	,	X	,	2	,	0	,	Z	),"	&	--	3	PF1.Data	F	1
+"	2	(	BC_1	,	*	,	control	,	0							),"	&	--	2	PF1.Control	F	
+"	1	(	BC_7	,	PF(0)	,	bidir	,	X	,	0	,	0	,	Z	),"	&	--	1	PF0.Data	F	0
+"	0	(	BC_1	,	*	,	control	,	0							)"	;	--	0	PF0.Control	F	
+																						
+end	AT90USB647	;																				

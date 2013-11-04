@@ -1,0 +1,318 @@
+------------------------------------------------------------------------                 
+-- A T M E L   A V R   M I C R O C O N T R O L L E R S                --                 
+------------------------------------------------------------------------                 
+-- BSDL file                 
+--                          
+-- File Name:     ATMEGA1280.BSD                
+-- File Revision: 1.0                
+-- Date created:  2007-08-01
+-- Revision date: 2008-06-09                
+-- Created by:    Atmel Corporation                
+-- Support:       avr@atmel.com                
+--                 
+-- Device:        ATmega1280                
+--                Rev A                
+-- Package:       100 pin TQFP (default)                
+--                100 pin MLF                
+--                          
+-- Visit http://www.atmel.com for an updated list of BSDL files.                 
+--                          
+--  
+-- =======================================================
+-- *******************************************************
+-- This BSDL has been validated for syntax and semantics
+-- compliance to IEEE 1149.1 using the ASSET/Agilent BSDL
+-- Validation Service.
+-- ******************************************************* 
+-- =======================================================               
+                 
+entity ATmega1280 is               
+
+generic (PHYSICAL_PIN_MAP : string := " TQFP ")  ;            
+
+port (                
+ RESET : in bit ;            
+ VCC   : linkage bit_vector(0 to 3) ;            
+ GND   : linkage bit_vector(0 to 4) ;            
+ XTAL1 : linkage bit ;            
+ XTAL2 : linkage bit ;            
+ PA    : inout bit_vector(0 to 7) ;            
+ PB    : inout bit_vector(0 to 7) ;            
+ PC    : inout bit_vector(0 to 7) ;
+ PD    : inout bit_vector(0 to 7) ;
+ PE    : inout bit_vector(0 to 7) ;
+ PF    : inout bit_vector(0 to 3) ;
+ TCK   : in bit ;
+ TMS   : in bit ;
+ TDO   : out bit ;
+ TDI   : in bit ;
+ PG    : inout bit_vector(0 to 5) ;
+ PH    : inout bit_vector(0 to 7) ;
+ PJ    : inout bit_vector(0 to 7) ;
+ PK    : inout bit_vector(0 to 7) ;
+ PL    : inout bit_vector(0 to 7) ;
+ AREF  : linkage bit ;
+ AVCC  : linkage bit 
+ );    
+
+use STD_1149_1_1994.all    ;
+
+attribute COMPONENT_CONFORMANCE of ATmega1280 : entity is  
+" STD_1149_1_1993 ";   
+
+attribute PIN_MAP of ATmega1280 : entity is PHYSICAL_PIN_MAP ;
+     
+constant TQFP : PIN_MAP_STRING:=  
+" RESET : 30 , " &
+" VCC   : (10,31,61,80) , " &
+" GND   : (11,32,62,81,99) , " &
+" XTAL1 : 34 , " &
+" XTAL2 : 33 , " &
+" PA    : (78,77,76,75,74,73,72,71) , " &
+" PB    : (19,20,21,22,23,24,25,26) , " &
+" PC    : (53,54,55,56,57,58,59,60) , " &
+" PD    : (43,44,45,46,47,48,49,50) , " &
+" PE    : (2,3,4,5,6,7,8,9) , " &
+" PF    : (97,96,95,94) , " &
+" TCK   : 93 , " &
+" TMS   : 92 , " &
+" TDO   : 91 , " &
+" TDI   : 90 , " &
+" PG    : (51,52,70,28,29,1) , " &
+" PH    : (12,13,14,15,16,17,18,27) , " &
+" PJ    : (63,64,65,66,67,68,69,79) , " &
+" PK    : (89,88,87,86,85,84,83,82) , " &
+" PL    : (35,36,37,38,39,40,41,42) , " &
+" AREF  : 98 , " &
+" AVCC  : 100 " ;
+
+constant MLF : PIN_MAP_STRING:=  
+" RESET : 30 , " &
+" VCC   : (10,31,61,80) , " &
+" GND   : (11,32,62,81,99) , " &
+" XTAL1 : 34 , " &
+" XTAL2 : 33 , " &
+" PA    : (78,77,76,75,74,73,72,71) , " &
+" PB    : (19,20,21,22,23,24,25,26) , " &
+" PC    : (53,54,55,56,57,58,59,60) , " &
+" PD    : (43,44,45,46,47,48,49,50) , " &
+" PE    : (2,3,4,5,6,7,8,9) , " &
+" PF    : (97,96,95,94) , " &
+" TCK   : 93 , " &
+" TMS   : 92 , " &
+" TDO   : 91 , " &
+" TDI   : 90 , " &
+" PG    : (51,52,70,28,29,1) , " & 
+" PH    : (12,13,14,15,16,17,18,27) , " & 
+" PJ    : (63,64,65,66,67,68,69,79) , " & 
+" PK    : (89,88,87,86,85,84,83,82) , " & 
+" PL    : (35,36,37,38,39,40,41,42) , " & 
+" AREF  : 98 , " & 
+" AVCC  : 100 " ; 
+
+attribute TAP_SCAN_IN of TDI : signal is true ;
+attribute TAP_SCAN_OUT of TDO : signal is true ;
+attribute TAP_SCAN_MODE of TMS : signal is true ;
+attribute TAP_SCAN_CLOCK of TCK : signal is (8.0e6, BOTH) ;
+
+attribute INSTRUCTION_LENGTH of ATmega1280 : entity is 4 ;
+      
+attribute INSTRUCTION_OPCODE of ATmega1280 : entity is  
+" EXTEST    ( 0000 )," & 
+" IDCODE    ( 0001 )," & 
+" SAMPLE    ( 0010 )," & 
+" PRIVATE0  ( 1000 )," & 
+" PRIVATE1  ( 1001 )," & 
+" PRIVATE2  ( 1010 )," & 
+" PRIVATE3  ( 1011 )," & 
+" AVR_RESET ( 1100 )," & 
+" BYPASS    ( 1111 )" ; 
+
+attribute INSTRUCTION_CAPTURE of ATmega1280 : entity is " 0001 ";
+      
+attribute INSTRUCTION_PRIVATE of ATmega1280 : entity is  
+" PRIVATE0 ," &   
+" PRIVATE1 ," &   
+" PRIVATE2 ," &   
+" PRIVATE3 " ;              
+                 
+attribute IDCODE_REGISTER of ATmega1280 : entity is             
+ "0000" &               
+ "1001011100000011" &               
+ "00000011111" &               
+ "1" ;               
+
+attribute REGISTER_ACCESS of ATmega1280 : entity is             
+" BOUNDARY ( AVR_RESET )" ;            
+
+attribute BOUNDARY_LENGTH of ATmega1280 : entity is 165 ;           
+                 
+attribute BOUNDARY_REGISTER of ATmega1280 : entity is             
+-- num  cell  port  func  safe  [ccell  dis  rslt]  
+" 164 ( BC_7 , PG(5) , bidir , X , 163 , 0 , Z )," &
+" 163 ( BC_1 , * , control , 0       )," &
+" 162 ( BC_7 , PE(0) , bidir , X , 161 , 0 , Z )," &
+" 161 ( BC_1 , * , control , 0       )," &
+" 160 ( BC_7 , PE(1) , bidir , X , 159 , 0 , Z )," &
+" 159 ( BC_1 , * , control , 0       )," &
+" 158 ( BC_7 , PE(2) , bidir , X , 157 , 0 , Z )," &
+" 157 ( BC_1 , * , control , 0       )," &
+" 156 ( BC_7 , PE(3) , bidir , X , 155 , 0 , Z )," &
+" 155 ( BC_1 , * , control , 0       )," &
+" 154 ( BC_7 , PE(4) , bidir , X , 153 , 0 , Z )," &
+" 153 ( BC_1 , * , control , 0       )," &
+" 152 ( BC_7 , PE(5) , bidir , X , 151 , 0 , Z )," &
+" 151 ( BC_1 , * , control , 0       )," &
+" 150 ( BC_7 , PE(6) , bidir , X , 149 , 0 , Z )," &
+" 149 ( BC_1 , * , control , 0       )," &
+" 148 ( BC_7 , PE(7) , bidir , X , 147 , 0 , Z )," &
+" 147 ( BC_1 , * , control , 0       )," &
+" 146 ( BC_7 , PH(0) , bidir , X , 145 , 0 , Z )," &
+" 145 ( BC_1 , * , control , 0       )," &
+" 144 ( BC_7 , PH(1) , bidir , X , 143 , 0 , Z )," &
+" 143 ( BC_1 , * , control , 0       )," &
+" 142 ( BC_7 , PH(2) , bidir , X , 141 , 0 , Z )," &
+" 141 ( BC_1 , * , control , 0       )," &
+" 140 ( BC_7 , PH(3) , bidir , X , 139 , 0 , Z )," &
+" 139 ( BC_1 , * , control , 0       )," &
+" 138 ( BC_7 , PH(4) , bidir , X , 137 , 0 , Z )," &
+" 137 ( BC_1 , * , control , 0       )," &
+" 136 ( BC_7 , PH(5) , bidir , X , 135 , 0 , Z )," &
+" 135 ( BC_1 , * , control , 0       )," &
+" 134 ( BC_7 , PH(6) , bidir , X , 133 , 0 , Z )," &
+" 133 ( BC_1 , * , control , 0       )," &
+" 132 ( BC_7 , PB(0) , bidir , X , 131 , 0 , Z )," &
+" 131 ( BC_1 , * , control , 0       )," &
+" 130 ( BC_7 , PB(1) , bidir , X , 129 , 0 , Z )," &
+" 129 ( BC_1 , * , control , 0       )," &
+" 128 ( BC_7 , PB(2) , bidir , X , 127 , 0 , Z )," &
+" 127 ( BC_1 , * , control , 0       )," &
+" 126 ( BC_7 , PB(3) , bidir , X , 125 , 0 , Z )," &
+" 125 ( BC_1 , * , control , 0       )," &
+" 124 ( BC_7 , PB(4) , bidir , X , 123 , 0 , Z )," &
+" 123 ( BC_1 , * , control , 0       )," &
+" 122 ( BC_7 , PB(5) , bidir , X , 121 , 0 , Z )," &
+" 121 ( BC_1 , * , control , 0       )," &
+" 120 ( BC_7 , PB(6) , bidir , X , 119 , 0 , Z )," &
+" 119 ( BC_1 , * , control , 0       )," &
+" 118 ( BC_7 , PB(7) , bidir , X , 117 , 0 , Z )," &
+" 117 ( BC_1 , * , control , 0       )," &
+" 116 ( BC_7 , PH(7) , bidir , X , 115 , 0 , Z )," &
+" 115 ( BC_1 , * , control , 0       )," &
+" 114 ( BC_7 , PG(3) , bidir , X , 113 , 0 , Z )," &
+" 113 ( BC_1 , * , control , 0       )," &
+" 112 ( BC_7 , PG(4) , bidir , X , 111 , 0 , Z )," &
+" 111 ( BC_1 , * , control , 0       )," &
+" 110 ( BC_4 , RESET , observe_only , X       )," &
+" 109 ( BC_7 , PL(0) , bidir , X , 108 , 0 , Z )," &
+" 108 ( BC_1 , * , control , 0       )," &
+" 107 ( BC_7 , PL(1) , bidir , X , 106 , 0 , Z )," &
+" 106 ( BC_1 , * , control , 0       )," &
+" 105 ( BC_7 , PL(2) , bidir , X , 104 , 0 , Z )," &
+" 104 ( BC_1 , * , control , 0       )," &
+" 103 ( BC_7 , PL(3) , bidir , X , 102 , 0 , Z )," &
+" 102 ( BC_1 , * , control , 0       )," &
+" 101 ( BC_7 , PL(4) , bidir , X , 100 , 0 , Z )," &
+" 100 ( BC_1 , * , control , 0       )," &
+" 99 ( BC_7 , PL(5) , bidir , X , 98 , 0 , Z )," &
+" 98 ( BC_1 , * , control , 0       )," &
+" 97 ( BC_7 , PL(6) , bidir , X , 96 , 0 , Z )," &
+" 96 ( BC_1 , * , control , 0       )," &
+" 95 ( BC_7 , PL(7) , bidir , X , 94 , 0 , Z )," &
+" 94 ( BC_1 , * , control , 0       )," &
+" 93 ( BC_7 , PD(0) , bidir , X , 92 , 0 , Z )," &
+" 92 ( BC_1 , * , control , 0       )," &
+" 91 ( BC_7 , PD(1) , bidir , X , 90 , 0 , Z )," &
+" 90 ( BC_1 , * , control , 0       )," &
+" 89 ( BC_7 , PD(2) , bidir , X , 88 , 0 , Z )," &
+" 88 ( BC_1 , * , control , 0       )," &
+" 87 ( BC_7 , PD(3) , bidir , X , 86 , 0 , Z )," &
+" 86 ( BC_1 , * , control , 0       )," &
+" 85 ( BC_7 , PD(4) , bidir , X , 84 , 0 , Z )," &
+" 84 ( BC_1 , * , control , 0       )," &
+" 83 ( BC_7 , PD(5) , bidir , X , 82 , 0 , Z )," &
+" 82 ( BC_1 , * , control , 0       )," &
+" 81 ( BC_7 , PD(6) , bidir , X , 80 , 0 , Z )," &
+" 80 ( BC_1 , * , control , 0       )," &
+" 79 ( BC_7 , PD(7) , bidir , X , 78 , 0 , Z )," &
+" 78 ( BC_1 , * , control , 0       )," &
+" 77 ( BC_7 , PG(0) , bidir , X , 76 , 0 , Z )," &
+" 76 ( BC_1 , * , control , 0       )," &
+" 75 ( BC_7 , PG(1) , bidir , X , 74 , 0 , Z )," &
+" 74 ( BC_1 , * , control , 0       )," &
+" 73 ( BC_7 , PC(0) , bidir , X , 72 , 0 , Z )," &
+" 72 ( BC_1 , * , control , 0       )," &
+" 71 ( BC_7 , PC(1) , bidir , X , 70 , 0 , Z )," &
+" 70 ( BC_1 , * , control , 0       )," &
+" 69 ( BC_7 , PC(2) , bidir , X , 68 , 0 , Z )," &
+" 68 ( BC_1 , * , control , 0       )," &
+" 67 ( BC_7 , PC(3) , bidir , X , 66 , 0 , Z )," &
+" 66 ( BC_1 , * , control , 0       )," &
+" 65 ( BC_7 , PC(4) , bidir , X , 64 , 0 , Z )," &
+" 64 ( BC_1 , * , control , 0       )," &
+" 63 ( BC_7 , PC(5) , bidir , X , 62 , 0 , Z )," &
+" 62 ( BC_1 , * , control , 0       )," &
+" 61 ( BC_7 , PC(6) , bidir , X , 60 , 0 , Z )," &
+" 60 ( BC_1 , * , control , 0       )," &
+" 59 ( BC_7 , PC(7) , bidir , X , 58 , 0 , Z )," &
+" 58 ( BC_1 , * , control , 0       )," &
+" 57 ( BC_7 , PJ(0) , bidir , X , 56 , 0 , Z )," &
+" 56 ( BC_1 , * , control , 0       )," &
+" 55 ( BC_7 , PJ(1) , bidir , X , 54 , 0 , Z )," &
+" 54 ( BC_1 , * , control , 0       )," &
+" 53 ( BC_7 , PJ(2) , bidir , X , 52 , 0 , Z )," &
+" 52 ( BC_1 , * , control , 0       )," &
+" 51 ( BC_7 , PJ(3) , bidir , X , 50 , 0 , Z )," &
+" 50 ( BC_1 , * , control , 0       )," &
+" 49 ( BC_7 , PJ(4) , bidir , X , 48 , 0 , Z )," &
+" 48 ( BC_1 , * , control , 0       )," &
+" 47 ( BC_7 , PJ(5) , bidir , X , 46 , 0 , Z )," &
+" 46 ( BC_1 , * , control , 0       )," &
+" 45 ( BC_7 , PJ(6) , bidir , X , 44 , 0 , Z )," &
+" 44 ( BC_1 , * , control , 0       )," &
+" 43 ( BC_7 , PG(2) , bidir , X , 42 , 0 , Z )," &
+" 42 ( BC_1 , * , control , 0       )," &
+" 41 ( BC_7 , PA(7) , bidir , X , 40 , 0 , Z )," &
+" 40 ( BC_1 , * , control , 0       )," &
+" 39 ( BC_7 , PA(6) , bidir , X , 38 , 0 , Z )," &
+" 38 ( BC_1 , * , control , 0       )," &
+" 37 ( BC_7 , PA(5) , bidir , X , 36 , 0 , Z )," &
+" 36 ( BC_1 , * , control , 0       )," &
+" 35 ( BC_7 , PA(4) , bidir , X , 34 , 0 , Z )," &
+" 34 ( BC_1 , * , control , 0       )," &
+" 33 ( BC_7 , PA(3) , bidir , X , 32 , 0 , Z )," &
+" 32 ( BC_1 , * , control , 0       )," &
+" 31 ( BC_7 , PA(2) , bidir , X , 30 , 0 , Z )," &
+" 30 ( BC_1 , * , control , 0       )," &
+" 29 ( BC_7 , PA(1) , bidir , X , 28 , 0 , Z )," &
+" 28 ( BC_1 , * , control , 0       )," &
+" 27 ( BC_7 , PA(0) , bidir , X , 26 , 0 , Z )," &
+" 26 ( BC_1 , * , control , 0       )," &
+" 25 ( BC_7 , PJ(7) , bidir , X , 24 , 0 , Z )," &
+" 24 ( BC_1 , * , control , 0       )," &
+" 23 ( BC_7 , PK(7) , bidir , X , 22 , 0 , Z )," &
+" 22 ( BC_1 , * , control , 0       )," &
+" 21 ( BC_7 , PK(6) , bidir , X , 20 , 0 , Z )," &
+" 20 ( BC_1 , * , control , 0       )," &
+" 19 ( BC_7 , PK(5) , bidir , X , 18 , 0 , Z )," &
+" 18 ( BC_1 , * , control , 0       )," &
+" 17 ( BC_7 , PK(4) , bidir , X , 16 , 0 , Z )," &
+" 16 ( BC_1 , * , control , 0       )," &
+" 15 ( BC_7 , PK(3) , bidir , X , 14 , 0 , Z )," &
+" 14 ( BC_1 , * , control , 0       )," &
+" 13 ( BC_7 , PK(2) , bidir , X , 12 , 0 , Z )," &
+" 12 ( BC_1 , * , control , 0       )," &
+" 11 ( BC_7 , PK(1) , bidir , X , 10 , 0 , Z )," &
+" 10 ( BC_1 , * , control , 0       )," &
+" 9 ( BC_7 , PK(0) , bidir , X , 8 , 0 , Z )," &
+" 8 ( BC_1 , * , control , 0       )," &
+" 7 ( BC_7 , PF(3) , bidir , X , 6 , 0 , Z )," &
+" 6 ( BC_1 , * , control , 0       )," &
+" 5 ( BC_7 , PF(2) , bidir , X , 4 , 0 , Z )," &
+" 4 ( BC_1 , * , control , 0       )," &
+" 3 ( BC_7 , PF(1) , bidir , X , 2 , 0 , Z )," &
+" 2 ( BC_1 , * , control , 0       )," &
+" 1 ( BC_7 , PF(0) , bidir , X , 0 , 0 , Z )," &
+" 0 ( BC_1 , * , control , 0       )" ;
+
+end ATmega1280 ;               

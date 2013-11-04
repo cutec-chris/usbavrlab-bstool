@@ -1,0 +1,583 @@
+------------------------------------------------------------------------
+-- A T M E L   A V R   M I C R O C O N T R O L L E R S                --
+------------------------------------------------------------------------
+-- BSDL file
+--
+-- File Name:           AT90CAN128.BSD
+-- File Revision:       1.0
+-- Date created:        2004-106-02
+-- Created by:          Atmel Corporation
+-- Support:             avr@atmel.com
+-- File Status:         Released
+--
+-- Device:              AT90CAN128
+--                      rev A
+-- Package:             64 pin TQFP (default)
+--                      64 pin MLF
+--
+--
+-- Visit http://www.atmel.com for a updated list of BSDL files.
+--
+--
+------------------------------------------------------------------------
+-- Syntax and Semantics are checked against the IEEE 1149.1 standard. --
+-- The logical functioning of the standard Boundary-Scan instructions --
+-- and of the associated bypass, idcode and boundary-scan register    --
+-- described in this BSDL file has been verified against its related  --
+-- silicon by JTAG Technologies B.V.                                  --
+------------------------------------------------------------------------
+------------------------------------------------------------------------
+--                       IMPORTANT NOTICE                             --
+--                                                                    --
+--   Copyright 2002 Atmel Corporation. All Rights Reserved.           --
+--                                                                    --
+--   Atmel assumes no responsibility or liability arising out         --
+--   this application or use of any information described herein      --
+--   except as expressly agreed to in writing by Atmel Corporation.   --
+--                                                                    --
+------------------------------------------------------------------------
+--
+-- Notes:
+-- 1. The behavior of the Oscillator Boundary Scan cells are dependant
+--    on the Oscillator Fuse settings, and are therefore described as
+--    "internal".
+-- 2. The Boundary Scan cells for controlling the analog features ADC,
+--    Comparator and pin pull-ups are described as "internal".
+--    Note that this feature is in addition to the (digital) cells on
+--    each pin. For information on accessing the pull-up function of the
+--    pins, please read the device data sheet.
+--
+
+entity  AT90CAN128  is
+
+generic (PHYSICAL_PIN_MAP : string := " TQFP    ")              ;
+
+port    (
+        NC      :       in      bit     ;
+        RESET   :       in      bit     ;
+        VCC     :       linkage bit     ;
+        VCC1    :       linkage bit     ;
+        GND     :       linkage bit     ;
+        GND1    :       linkage bit     ;
+        GND2    :       linkage bit     ;
+        XTAL1   :       linkage bit     ;
+        XTAL2   :       linkage bit     ;
+        PA      :       inout   bit_vector(0 to 7)      ;
+        PB      :       inout   bit_vector(0 to 7)      ;
+        PC      :       inout   bit_vector(0 to 7)      ;
+        PD      :       inout   bit_vector(0 to 7)      ;
+        PE      :       inout   bit_vector(0 to 7)      ;
+        PF      :       inout   bit_vector(0 to 3)      ;
+        TCK     :       in      bit     ;
+        TMS     :       in      bit     ;
+        TDO     :       out     bit     ;
+        TDI     :       in      bit     ;
+        PG      :       inout   bit_vector(0 to 4)      ;
+        AREF    :       linkage bit     ;
+        AVCC    :       linkage bit
+        );
+
+use     STD_1149_1_1994.all                             ;
+
+attribute       COMPONENT_CONFORMANCE of        AT90CAN128  : entity is
+"       STD_1149_1_1993 ";
+
+attribute       PIN_MAP of      AT90CAN128  : entity is     PHYSICAL_PIN_MAP        ;
+
+constant        TQFP    :       PIN_MAP_STRING:=
+"       NC      :       1       , "     &
+"       RESET   :       20      , "     &
+"       VCC     :       21      , "     &
+"       VCC1    :       52      , "     &
+"       GND     :       22      , "     &
+"       GND1    :       53      , "     &
+"       GND2    :       63      , "     &
+"       XTAL1   :       24      , "     &
+"       XTAL2   :       23      , "     &
+"       PA      :       (51,50,49,48,47,46,45,44)       , "     &
+"       PB      :       (10,11,12,13,14,15,16,17)       , "     &
+"       PC      :       (35,36,37,38,39,40,41,42)       , "     &
+"       PD      :       (25,26,27,28,29,30,31,32)       , "     &
+"       PE      :       (2,3,4,5,6,7,8,9)       , "     &
+"       PF      :       (61,60,59,58)   , "     &
+"       TCK     :       57      , "     &
+"       TMS     :       56      , "     &
+"       TDO     :       55      , "     &
+"       TDI     :       54      , "     &
+"       PG      :       (33,34,43,18,19)        , "     &
+"       AREF    :       62      , "     &
+"       AVCC    :       64      "       ;
+
+constant        MLF     :       PIN_MAP_STRING:=
+"       NC      :       1       , "     &
+"       RESET   :       20      , "     &
+"       VCC     :       21      , "     &
+"       VCC1    :       52      , "     &
+"       GND     :       22      , "     &
+"       GND1    :       53      , "     &
+"       GND2    :       63      , "     &
+"       XTAL1   :       24      , "     &
+"       XTAL2   :       23      , "     &
+"       PA      :       (51,50,49,48,47,46,45,44)       , "     &
+"       PB      :       (10,11,12,13,14,15,16,17)       , "     &
+"       PC      :       (35,36,37,38,39,40,41,42)       , "     &
+"       PD      :       (25,26,27,28,29,30,31,32)       , "     &
+"       PE      :       (2,3,4,5,6,7,8,9)       , "     &
+"       PF      :       (61,60,59,58)   , "     &
+"       TCK     :       57      , "     &
+"       TMS     :       56      , "     &
+"       TDO     :       55      , "     &
+"       TDI     :       54      , "     &
+"       PG      :       (33,34,43,18,19)        , "     &
+"       AREF    :       62      , "     &
+"       AVCC    :       64      "       ;
+
+attribute       TAP_SCAN_IN     of      TDI     : signal is     true    ;
+attribute       TAP_SCAN_OUT    of      TDO     : signal is     true    ;
+attribute       TAP_SCAN_MODE   of      TMS     : signal is     true    ;
+attribute       TAP_SCAN_CLOCK  of      TCK     : signal is     (8.0e6, BOTH)   ;
+
+attribute       INSTRUCTION_LENGTH      of      AT90CAN128  : entity is     4       ;
+
+attribute       INSTRUCTION_OPCODE      of      AT90CAN128  : entity is
+"       EXTEST          (       0000    ),"     &
+"       IDCODE          (       0001    ),"     &
+"       SAMPLE          (       0010    ),"     &
+"       PRIVATE0        (       1000    ),"     &
+"       PRIVATE1        (       1001    ),"     &
+"       PRIVATE2        (       1010    ),"     &
+"       PRIVATE3        (       1011    ),"     &
+"       AVR_RESET       (       1100    ),"     &
+"       BYPASS          (       1111    )"      ;
+
+attribute       INSTRUCTION_CAPTURE     of      AT90CAN128  : entity is "   0001    ";
+
+attribute       INSTRUCTION_PRIVATE     of      AT90CAN128  : entity is
+"       PRIVATE0        ,"      &
+"       PRIVATE1        ,"      &
+"       PRIVATE2        ,"      &
+"       PRIVATE3        "       ;
+
+attribute       IDCODE_REGISTER of      AT90CAN128  : entity is
+        "0000"  &
+--      0x0
+        "1001011110000001"      &
+--      0x9781
+        "00000011111"   &
+--      0x01F
+        "1"     ;
+
+attribute       REGISTER_ACCESS of      AT90CAN128  : entity is
+"       BOUNDARY        (       AVR_RESET       )"      ;
+
+attribute       BOUNDARY_LENGTH of      AT90CAN128  : entity is     201     ;
+
+attribute       BOUNDARY_REGISTER       of      AT90CAN128  : entity is
+--      num             cell            port            func            safe            [ccell          dis
+rslt]
+"       200     (       BC_1    ,       *       ,       internal        ,       1
+),"     &       --      200     AC_IDLE
+"       199     (       BC_1    ,       *       ,       internal        ,       0
+),"     &       --      199     ACO
+"       198     (       BC_1    ,       *       ,       internal        ,       0
+),"     &       --      198     ACME
+"       197     (       BC_1    ,       *       ,       internal        ,       0
+),"     &       --      197     AINBG
+"       196     (       BC_1    ,       *       ,       internal        ,       0
+),"     &       --      196     COMP
+"       195     (       BC_1    ,       *       ,       internal        ,       0
+),"     &       --      195     ACLK
+"       194     (       BC_1    ,       *       ,       internal        ,       0
+),"     &       --      194     ACTEN
+"       193     (       BC_1    ,       *       ,       internal        ,       0
+),"     &       --      193     ADHSM
+"       192     (       BC_1    ,       *       ,       internal        ,       0
+),"     &       --      192     ADCBGEN
+"       191     (       BC_1    ,       *       ,       internal        ,       0
+),"     &       --      191     ADCEN
+"       190     (       BC_1    ,       *       ,       internal        ,       0
+),"     &       --      190     AMPEN
+"       189     (       BC_1    ,       *       ,       internal        ,       1
+),"     &       --      189     DAC_9
+"       188     (       BC_1    ,       *       ,       internal        ,       0
+),"     &       --      188     DAC_8
+"       187     (       BC_1    ,       *       ,       internal        ,       0
+),"     &       --      187     DAC_7
+"       186     (       BC_1    ,       *       ,       internal        ,       0
+),"     &       --      186     DAC_6
+"       185     (       BC_1    ,       *       ,       internal        ,       0
+),"     &       --      185     DAC_5
+"       184     (       BC_1    ,       *       ,       internal        ,       0
+),"     &       --      184     DAC_4
+"       183     (       BC_1    ,       *       ,       internal        ,       0
+),"     &       --      183     DAC_3
+"       182     (       BC_1    ,       *       ,       internal        ,       0
+),"     &       --      182     DAC_2
+"       181     (       BC_1    ,       *       ,       internal        ,       0
+),"     &       --      181     DAC_1
+"       180     (       BC_1    ,       *       ,       internal        ,       0
+),"     &       --      180     DAC_0
+"       179     (       BC_1    ,       *       ,       internal        ,       1
+),"     &       --      179     EXTCH
+"       178     (       BC_1    ,       *       ,       internal        ,       0
+),"     &       --      178     G10
+"       177     (       BC_1    ,       *       ,       internal        ,       0
+),"     &       --      177     G20
+"       176     (       BC_1    ,       *       ,       internal        ,       0
+),"     &       --      176     GNDEN
+"       175     (       BC_1    ,       *       ,       internal        ,       1
+),"     &       --      175     HOLD
+"       174     (       BC_1    ,       *       ,       internal        ,       0
+),"     &       --      174     IREFEN
+"       173     (       BC_1    ,       *       ,       internal        ,       0
+),"     &       --      173     MUXEN_7
+"       172     (       BC_1    ,       *       ,       internal        ,       0
+),"     &       --      172     MUXEN_6
+"       171     (       BC_1    ,       *       ,       internal        ,       0
+),"     &       --      171     MUXEN_5
+"       170     (       BC_1    ,       *       ,       internal        ,       0
+),"     &       --      170     MUXEN_4
+"       169     (       BC_1    ,       *       ,       internal        ,       0
+),"     &       --      169     MUXEN_3
+"       168     (       BC_1    ,       *       ,       internal        ,       0
+),"     &       --      168     MUXEN_2
+"       167     (       BC_1    ,       *       ,       internal        ,       0
+),"     &       --      167     MUXEN_1
+"       166     (       BC_1    ,       *       ,       internal        ,       1
+),"     &       --      166     MUXEN_0
+"       165     (       BC_1    ,       *       ,       internal        ,       0
+),"     &       --      165     NEGSEL_2
+"       164     (       BC_1    ,       *       ,       internal        ,       0
+),"     &       --      164     NEGSEL_1
+"       163     (       BC_1    ,       *       ,       internal        ,       0
+),"     &       --      163     NEGSEL_0
+"       162     (       BC_1    ,       *       ,       internal        ,       1
+),"     &       --      162     PASSEN
+"       161     (       BC_1    ,       *       ,       internal        ,       1
+),"     &       --      161     PRECH
+"       160     (       BC_1    ,       *       ,       internal        ,       0
+),"     &       --      160     SCTEST
+"       159     (       BC_1    ,       *       ,       internal        ,       0
+),"     &       --      159     ST
+"       158     (       BC_1    ,       *       ,       internal        ,       0
+),"     &       --      158     VCCREN
+"       157     (       BC_7    ,       PE(0)   ,       bidir   ,       X       ,       156     ,       0       ,       Z
+),"     &       --      157     PE0.Data
+"       156     (       BC_1    ,       *       ,       control ,       0
+),"     &       --      156     PE0.Control
+"       155     (       BC_1    ,       *       ,       internal        ,       0
+),"     &       --      155     PE0.Pullup_Enable
+"       154     (       BC_7    ,       PE(1)   ,       bidir   ,       X       ,       153     ,       0       ,       Z
+),"     &       --      154     PE1.Data
+"       153     (       BC_1    ,       *       ,       control ,       0
+),"     &       --      153     PE1.Control
+"       152     (       BC_1    ,       *       ,       internal        ,       0
+),"     &       --      152     PE1.Pullup_Enable
+"       151     (       BC_7    ,       PE(2)   ,       bidir   ,       X       ,       150     ,       0       ,       Z
+),"     &       --      151     PE2.Data
+"       150     (       BC_1    ,       *       ,       control ,       0
+),"     &       --      150     PE2.Control
+"       149     (       BC_1    ,       *       ,       internal        ,       0
+),"     &       --      149     PE2.Pullup_Enable
+"       148     (       BC_7    ,       PE(3)   ,       bidir   ,       X       ,       147     ,       0       ,       Z
+),"     &       --      148     PE3.Data
+"       147     (       BC_1    ,       *       ,       control ,       0
+),"     &       --      147     PE3.Control
+"       146     (       BC_1    ,       *       ,       internal        ,       0
+),"     &       --      146     PE3.Pullup_Enable
+"       145     (       BC_7    ,       PE(4)   ,       bidir   ,       X       ,       144     ,       0       ,       Z
+),"     &       --      145     PE4.Data
+"       144     (       BC_1    ,       *       ,       control ,       0
+),"     &       --      144     PE4.Control
+"       143     (       BC_1    ,       *       ,       internal        ,       0
+),"     &       --      143     PE4.Pullup_Enable
+"       142     (       BC_7    ,       PE(5)   ,       bidir   ,       X       ,       141     ,       0       ,       Z
+),"     &       --      142     PE5.Data
+"       141     (       BC_1    ,       *       ,       control ,       0
+),"     &       --      141     PE5.Control
+"       140     (       BC_1    ,       *       ,       internal        ,       0
+),"     &       --      140     PE5.Pullup_Enable
+"       139     (       BC_7    ,       PE(6)   ,       bidir   ,       X       ,       138     ,       0       ,       Z
+),"     &       --      139     PE6.Data
+"       138     (       BC_1    ,       *       ,       control ,       0
+),"     &       --      138     PE6.Control
+"       137     (       BC_1    ,       *       ,       internal        ,       0
+),"     &       --      137     PE6.Pullup_Enable
+"       136     (       BC_7    ,       PE(7)   ,       bidir   ,       X       ,       135     ,       0       ,       Z
+),"     &       --      136     PE7.Data
+"       135     (       BC_1    ,       *       ,       control ,       0
+),"     &       --      135     PE7.Control
+"       134     (       BC_1    ,       *       ,       internal        ,       0
+),"     &       --      134     PE7.Pullup_Enable
+"       133     (       BC_7    ,       PB(0)   ,       bidir   ,       X       ,       132     ,       0       ,       Z
+),"     &       --      133     PB0.Data
+"       132     (       BC_1    ,       *       ,       control ,       0
+),"     &       --      132     PB0.Control
+"       131     (       BC_1    ,       *       ,       internal        ,       0
+),"     &       --      131     PB0.Pullup_Enable
+"       130     (       BC_7    ,       PB(1)   ,       bidir   ,       X       ,       129     ,       0       ,       Z
+),"     &       --      130     PB1.Data
+"       129     (       BC_1    ,       *       ,       control ,       0
+),"     &       --      129     PB1.Control
+"       128     (       BC_1    ,       *       ,       internal        ,       0
+),"     &       --      128     PB1.Pullup_Enable
+"       127     (       BC_7    ,       PB(2)   ,       bidir   ,       X       ,       126     ,       0       ,       Z
+),"     &       --      127     PB2.Data
+"       126     (       BC_1    ,       *       ,       control ,       0
+),"     &       --      126     PB2.Control
+"       125     (       BC_1    ,       *       ,       internal        ,       0
+),"     &       --      125     PB2.Pullup_Enable
+"       124     (       BC_7    ,       PB(3)   ,       bidir   ,       X       ,       123     ,       0       ,       Z
+),"     &       --      124     PB3.Data
+"       123     (       BC_1    ,       *       ,       control ,       0
+),"     &       --      123     PB3.Control
+"       122     (       BC_1    ,       *       ,       internal        ,       0
+),"     &       --      122     PB3.Pullup_Enable
+"       121     (       BC_7    ,       PB(4)   ,       bidir   ,       X       ,       120     ,       0       ,       Z
+),"     &       --      121     PB4.Data
+"       120     (       BC_1    ,       *       ,       control ,       0
+),"     &       --      120     PB4.Control
+"       119     (       BC_1    ,       *       ,       internal        ,       0
+),"     &       --      119     PB4.Pullup_Enable
+"       118     (       BC_7    ,       PB(5)   ,       bidir   ,       X       ,       117     ,       0       ,       Z
+),"     &       --      118     PB5.Data
+"       117     (       BC_1    ,       *       ,       control ,       0
+),"     &       --      117     PB5.Control
+"       116     (       BC_1    ,       *       ,       internal        ,       0
+),"     &       --      116     PB5.Pullup_Enable
+"       115     (       BC_7    ,       PB(6)   ,       bidir   ,       X       ,       114     ,       0       ,       Z
+),"     &       --      115     PB6.Data
+"       114     (       BC_1    ,       *       ,       control ,       0
+),"     &       --      114     PB6.Control
+"       113     (       BC_1    ,       *       ,       internal        ,       0
+),"     &       --      113     PB6.Pullup_Enable
+"       112     (       BC_7    ,       PB(7)   ,       bidir   ,       X       ,       111     ,       0       ,       Z
+),"     &       --      112     PB7.Data
+"       111     (       BC_1    ,       *       ,       control ,       0
+),"     &       --      111     PB7.Control
+"       110     (       BC_1    ,       *       ,       internal        ,       0
+),"     &       --      110     PB7.Pullup_Enable
+"       109     (       BC_7    ,       PG(3)   ,       bidir   ,       X       ,       108     ,       0       ,       Z
+),"     &       --      109     PG3.Data
+"       108     (       BC_1    ,       *       ,       control ,       0
+),"     &       --      108     PG3.Control
+"       107     (       BC_1    ,       *       ,       internal        ,       0
+),"     &       --      107     PG3.Pullup_Enable
+"       106     (       BC_7    ,       PG(4)   ,       bidir   ,       X       ,       105     ,       0       ,       Z
+),"     &       --      106     PG4.Data
+"       105     (       BC_1    ,       *       ,       control ,       0
+),"     &       --      105     PG4.Control
+"       104     (       BC_1    ,       *       ,       internal        ,       0
+),"     &       --      104     PG4.Pullup_Enable
+"       103     (       BC_4    ,       *       ,       internal        ,       X
+),"     &       --      103     PG5
+"       102     (       BC_4    ,       RESET   ,       observe_only    ,       X
+),"     &       --      102     RSTT
+"       101     (       BC_4    ,       *       ,       internal        ,       X
+),"     &       --      101     RSTHV
+"       100     (       BC_1    ,       *       ,       internal        ,       X
+),"     &       --      100     EXTCLKEN
+"       99      (       BC_1    ,       *       ,       internal        ,       X
+),"     &       --      99      OSCON
+"       98      (       BC_1    ,       *       ,       internal        ,       X
+),"     &       --      98      RCOSCEN
+"       97      (       BC_1    ,       *       ,       internal        ,       X
+),"     &       --      97      OSC32EN
+"       96      (       BC_4    ,       *       ,       internal        ,       X
+),"     &       --      96      EXTCLK
+"       95      (       BC_4    ,       *       ,       internal        ,       X
+),"     &       --      95      OSCCK
+"       94      (       BC_4    ,       *       ,       internal        ,       X
+),"     &       --      94      RCCK
+"       93      (       BC_4    ,       *       ,       internal        ,       X
+),"     &       --      93      OSC32CK
+"       92      (       BC_7    ,       PD(0)   ,       bidir   ,       X       ,       91      ,       0       ,       Z
+),"     &       --      92      PD0.Data
+"       91      (       BC_1    ,       *       ,       control ,       0
+),"     &       --      91      PD0.Control
+"       90      (       BC_1    ,       *       ,       internal        ,       0
+),"     &       --      90      PD0.Pullup_Enable
+"       89      (       BC_7    ,       PD(1)   ,       bidir   ,       X       ,       88      ,       0       ,       Z
+),"     &       --      89      PD1.Data
+"       88      (       BC_1    ,       *       ,       control ,       0
+),"     &       --      88      PD1.Control
+"       87      (       BC_1    ,       *       ,       internal        ,       0
+),"     &       --      87      PD1.Pullup_Enable
+"       86      (       BC_7    ,       PD(2)   ,       bidir   ,       X       ,       85      ,       0       ,       Z
+),"     &       --      86      PD2.Data
+"       85      (       BC_1    ,       *       ,       control ,       0
+),"     &       --      85      PD2.Control
+"       84      (       BC_1    ,       *       ,       internal        ,       0
+),"     &       --      84      PD2.Pullup_Enable
+"       83      (       BC_7    ,       PD(3)   ,       bidir   ,       X       ,       82      ,       0       ,       Z
+),"     &       --      83      PD3.Data
+"       82      (       BC_1    ,       *       ,       control ,       0
+),"     &       --      82      PD3.Control
+"       81      (       BC_1    ,       *       ,       internal        ,       0
+),"     &       --      81      PD3.Pullup_Enable
+"       80      (       BC_7    ,       PD(4)   ,       bidir   ,       X       ,       79      ,       0       ,       Z
+),"     &       --      80      PD4.Data
+"       79      (       BC_1    ,       *       ,       control ,       0
+),"     &       --      79      PD4.Control
+"       78      (       BC_1    ,       *       ,       internal        ,       0
+),"     &       --      78      PD4.Pullup_Enable
+"       77      (       BC_7    ,       PD(5)   ,       bidir   ,       X       ,       76      ,       0       ,       Z
+),"     &       --      77      PD5.Data
+"       76      (       BC_1    ,       *       ,       control ,       0
+),"     &       --      76      PD5.Control
+"       75      (       BC_1    ,       *       ,       internal        ,       0
+),"     &       --      75      PD5.Pullup_Enable
+"       74      (       BC_7    ,       PD(6)   ,       bidir   ,       X       ,       73      ,       0       ,       Z
+),"     &       --      74      PD6.Data
+"       73      (       BC_1    ,       *       ,       control ,       0
+),"     &       --      73      PD6.Control
+"       72      (       BC_1    ,       *       ,       internal        ,       0
+),"     &       --      72      PD6.Pullup_Enable
+"       71      (       BC_7    ,       PD(7)   ,       bidir   ,       X       ,       70      ,       0       ,       Z
+),"     &       --      71      PD7.Data
+"       70      (       BC_1    ,       *       ,       control ,       0
+),"     &       --      70      PD7.Control
+"       69      (       BC_1    ,       *       ,       internal        ,       0
+),"     &       --      69      PD7.Pullup_Enable
+"       68      (       BC_7    ,       PG(0)   ,       bidir   ,       X       ,       67      ,       0       ,       Z
+),"     &       --      68      PG0.Data
+"       67      (       BC_1    ,       *       ,       control ,       0
+),"     &       --      67      PG0.Control
+"       66      (       BC_1    ,       *       ,       internal        ,       0
+),"     &       --      66      PG0.Pullup_Enable
+"       65      (       BC_7    ,       PG(1)   ,       bidir   ,       X       ,       64      ,       0       ,       Z
+),"     &       --      65      PG1.Data
+"       64      (       BC_1    ,       *       ,       control ,       0
+),"     &       --      64      PG1.Control
+"       63      (       BC_1    ,       *       ,       internal        ,       0
+),"     &       --      63      PG1.Pullup_Enable
+"       62      (       BC_7    ,       PC(0)   ,       bidir   ,       X       ,       61      ,       0       ,       Z
+),"     &       --      62      PC0.Data
+"       61      (       BC_1    ,       *       ,       control ,       0
+),"     &       --      61      PC0.Control
+"       60      (       BC_1    ,       *       ,       internal        ,       0
+),"     &       --      60      PC0.Pullup_Enable
+"       59      (       BC_7    ,       PC(1)   ,       bidir   ,       X       ,       58      ,       0       ,       Z
+),"     &       --      59      PC1.Data
+"       58      (       BC_1    ,       *       ,       control ,       0
+),"     &       --      58      PC1.Control
+"       57      (       BC_1    ,       *       ,       internal        ,       0
+),"     &       --      57      PC1.Pullup_Enable
+"       56      (       BC_7    ,       PC(2)   ,       bidir   ,       X       ,       55      ,       0       ,       Z
+),"     &       --      56      PC2.Data
+"       55      (       BC_1    ,       *       ,       control ,       0
+),"     &       --      55      PC2.Control
+"       54      (       BC_1    ,       *       ,       internal        ,       0
+),"     &       --      54      PC2.Pullup_Enable
+"       53      (       BC_7    ,       PC(3)   ,       bidir   ,       X       ,       52      ,       0       ,       Z
+),"     &       --      53      PC3.Data
+"       52      (       BC_1    ,       *       ,       control ,       0
+),"     &       --      52      PC3.Control
+"       51      (       BC_1    ,       *       ,       internal        ,       0
+),"     &       --      51      PC3.Pullup_Enable
+"       50      (       BC_7    ,       PC(4)   ,       bidir   ,       X       ,       49      ,       0       ,       Z
+),"     &       --      50      PC4.Data
+"       49      (       BC_1    ,       *       ,       control ,       0
+),"     &       --      49      PC4.Control
+"       48      (       BC_1    ,       *       ,       internal        ,       0
+),"     &       --      48      PC4.Pullup_Enable
+"       47      (       BC_7    ,       PC(5)   ,       bidir   ,       X       ,       46      ,       0       ,       Z
+),"     &       --      47      PC5.Data
+"       46      (       BC_1    ,       *       ,       control ,       0
+),"     &       --      46      PC5.Control
+"       45      (       BC_1    ,       *       ,       internal        ,       0
+),"     &       --      45      PC5.Pullup_Enable
+"       44      (       BC_7    ,       PC(6)   ,       bidir   ,       X       ,       43      ,       0       ,       Z
+),"     &       --      44      PC6.Data
+"       43      (       BC_1    ,       *       ,       control ,       0
+),"     &       --      43      PC6.Control
+"       42      (       BC_1    ,       *       ,       internal        ,       0
+),"     &       --      42      PC6.Pullup_Enable
+"       41      (       BC_7    ,       PC(7)   ,       bidir   ,       X       ,       40      ,       0       ,       Z
+),"     &       --      41      PC7.Data
+"       40      (       BC_1    ,       *       ,       control ,       0
+),"     &       --      40      PC7.Control
+"       39      (       BC_1    ,       *       ,       internal        ,       0
+),"     &       --      39      PC7.Pullup_Enable
+"       38      (       BC_7    ,       PG(2)   ,       bidir   ,       X       ,       37      ,       0       ,       Z
+),"     &       --      38      PG2.Data
+"       37      (       BC_1    ,       *       ,       control ,       0
+),"     &       --      37      PG2.Control
+"       36      (       BC_1    ,       *       ,       internal        ,       0
+),"     &       --      36      PG2.Pullup_Enable
+"       35      (       BC_7    ,       PA(7)   ,       bidir   ,       X       ,       34      ,       0       ,       Z
+),"     &       --      35      PA7.Data
+"       34      (       BC_1    ,       *       ,       control ,       0
+),"     &       --      34      PA7.Control
+"       33      (       BC_1    ,       *       ,       internal        ,       0
+),"     &       --      33      PA7.Pullup_Enable
+"       32      (       BC_7    ,       PA(6)   ,       bidir   ,       X       ,       31      ,       0       ,       Z
+),"     &       --      32      PA6.Data
+"       31      (       BC_1    ,       *       ,       control ,       0
+),"     &       --      31      PA6.Control
+"       30      (       BC_1    ,       *       ,       internal        ,       0
+),"     &       --      30      PA6.Pullup_Enable
+"       29      (       BC_7    ,       PA(5)   ,       bidir   ,       X       ,       28      ,       0       ,       Z
+),"     &       --      29      PA5.Data
+"       28      (       BC_1    ,       *       ,       control ,       0
+),"     &       --      28      PA5.Control
+"       27      (       BC_1    ,       *       ,       internal        ,       0
+),"     &       --      27      PA5.Pullup_Enable
+"       26      (       BC_7    ,       PA(4)   ,       bidir   ,       X       ,       25      ,       0       ,       Z
+),"     &       --      26      PA4.Data
+"       25      (       BC_1    ,       *       ,       control ,       0
+),"     &       --      25      PA4.Control
+"       24      (       BC_1    ,       *       ,       internal        ,       0
+),"     &       --      24      PA4.Pullup_Enable
+"       23      (       BC_7    ,       PA(3)   ,       bidir   ,       X       ,       22      ,       0       ,       Z
+),"     &       --      23      PA3.Data
+"       22      (       BC_1    ,       *       ,       control ,       0
+),"     &       --      22      PA3.Control
+"       21      (       BC_1    ,       *       ,       internal        ,       0
+),"     &       --      21      PA3.Pullup_Enable
+"       20      (       BC_7    ,       PA(2)   ,       bidir   ,       X       ,       19      ,       0       ,       Z
+),"     &       --      20      PA2.Data
+"       19      (       BC_1    ,       *       ,       control ,       0
+),"     &       --      19      PA2.Control
+"       18      (       BC_1    ,       *       ,       internal        ,       0
+),"     &       --      18      PA2.Pullup_Enable
+"       17      (       BC_7    ,       PA(1)   ,       bidir   ,       X       ,       16      ,       0       ,       Z
+),"     &       --      17      PA1.Data
+"       16      (       BC_1    ,       *       ,       control ,       0
+),"     &       --      16      PA1.Control
+"       15      (       BC_1    ,       *       ,       internal        ,       0
+),"     &       --      15      PA1.Pullup_Enable
+"       14      (       BC_7    ,       PA(0)   ,       bidir   ,       X       ,       13      ,       0       ,       Z
+),"     &       --      14      PA0.Data
+"       13      (       BC_1    ,       *       ,       control ,       0
+),"     &       --      13      PA0.Control
+"       12      (       BC_1    ,       *       ,       internal        ,       0
+),"     &       --      12      PA0.Pullup_Enable
+"       11      (       BC_7    ,       PF(3)   ,       bidir   ,       X       ,       10      ,       0       ,       Z
+),"     &       --      11      PF3.Data
+"       10      (       BC_1    ,       *       ,       control ,       0
+),"     &       --      10      PF3.Control
+"       9       (       BC_1    ,       *       ,       internal        ,       0
+),"     &       --      9       PF3.Pullup_Enable
+"       8       (       BC_7    ,       PF(2)   ,       bidir   ,       X       ,       7       ,       0       ,       Z
+),"     &       --      8       PF2.Data
+"       7       (       BC_1    ,       *       ,       control ,       0
+),"     &       --      7       PF2.Control
+"       6       (       BC_1    ,       *       ,       internal        ,       0
+),"     &       --      6       PF2.Pullup_Enable
+"       5       (       BC_7    ,       PF(1)   ,       bidir   ,       X       ,       4       ,       0       ,       Z
+),"     &       --      5       PF1.Data
+"       4       (       BC_1    ,       *       ,       control ,       0
+),"     &       --      4       PF1.Control
+"       3       (       BC_1    ,       *       ,       internal        ,       0
+),"     &       --      3       PF1.Pullup_Enable
+"       2       (       BC_7    ,       PF(0)   ,       bidir   ,       X       ,       1       ,       0       ,       Z
+),"     &       --      2       PF0.Data
+"       1       (       BC_1    ,       *       ,       control ,       0
+),"     &       --      1       PF0.Control
+"       0       (       BC_1    ,       *       ,       internal        ,       0
+)"      ;       --      0       PF0.Pullup_Enable
+
+end     AT90CAN128  ;
+
+

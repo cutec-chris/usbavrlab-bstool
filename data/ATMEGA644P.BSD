@@ -1,0 +1,238 @@
+------------------------------------------------------------------------                                  
+-- A T M E L   A V R   M I C R O C O N T R O L L E R S                --                                  
+------------------------------------------------------------------------                                  
+-- BSDL file                                  
+-- File Name:     ATMEGA644P.BSD                                
+-- File Revision: 1.0                               
+-- Date created:  2006-12-19
+-- Revision date: 2008-06-09                                
+-- Created by:    Atmel Corporation                               
+-- Support:       avr@atmel.com                               
+--                                  
+-- Device:        ATmega644P                                
+--                rev B                               
+-- Package:       40 pin PDIP                               
+--                44 pin TQFP  (default)                                
+--                44 pin MLF                                
+--                                          
+-- Visit http://www.atmel.com for a updated list of BSDL files.                                 
+--                                          
+--
+-- =======================================================
+-- *******************************************************
+-- This BSDL has been validated for syntax and semantics
+-- compliance to IEEE 1149.1 using the ASSET/Agilent BSDL
+-- Validation Service.
+-- ******************************************************* 
+-- =======================================================
+
+                                  
+                                  
+entity  ATmega644P  is                              
+
+generic (PHYSICAL_PIN_MAP : string := " TQFP  ")    ;                       
+
+port  (                               
+  RESET : in  bit ;                       
+  VCC   : linkage bit ;                       
+  VCC1  : linkage bit ;                       
+  VCC2  : linkage bit ;                       
+  GND   : linkage bit ;                       
+  GND1  : linkage bit ;
+  GND2  : linkage bit ;
+  GND3  : linkage bit ;
+  XTAL1 : linkage bit ;
+  XTAL2 : linkage bit ;
+  PA    : inout bit_vector(0 to 7)  ;
+  PB    : inout bit_vector(0 to 7)  ;
+  PC0   : inout bit ;
+  PC1   : inout bit ;
+  TCK   : in  bit ;
+  TMS   : in  bit ;
+  TDO   : out bit ;
+  TDI   : in  bit ;
+  PC6   : inout bit ;
+  PC7   : inout bit ;
+  PD  : inout bit_vector(0 to 7)  ;
+  AREF  : linkage bit ;
+  AVCC  : linkage bit 
+  );        
+
+use STD_1149_1_1994.all       ;
+
+attribute COMPONENT_CONFORMANCE of  ATmega644P  : entity is   
+" STD_1149_1_1993 ";      
+
+attribute PIN_MAP of  ATmega644P  : entity is PHYSICAL_PIN_MAP  ;
+          
+constant  PDIP  : PIN_MAP_STRING:=    
+" RESET : 9 , " &
+" VCC   : 10  , " &
+" GND   : 11  , " &
+" XTAL1 : 13  , " &
+" XTAL2 : 12  , " &
+" PA    : (40,39,38,37,36,35,34,33) , " &
+" PB    : (1,2,3,4,5,6,7,8) , " &
+" PC0   : 22  , " &
+" PC1   : 23  , " &
+" TCK   : 24  , " &
+" TMS   : 25  , " &
+" TDO   : 26  , " &
+" TDI   : 27  , " &
+" PC6   : 28  , " &
+" PC7   : 29  , " &
+" PD    : (14,15,16,17,18,19,20,21) , " &
+" AREF  : 32  , " &
+" GND1  : 31  , " &
+" AVCC  : 30  " ;
+
+constant  TQFP  : PIN_MAP_STRING:=    
+" RESET : 4 , " &
+" VCC   : 5 , " &
+" VCC1  : 17  , " &
+" VCC2  : 38  , " &
+" GND   : 6 , " &
+" GND1  : 18  , " &
+" GND2  : 39  , " &
+" XTAL1 : 8 , " &
+" XTAL2 : 7 , " &
+" PA    : (37,36,35,34,33,32,31,30) , " &
+" PB    : (40,41,42,43,44,1,2,3)  , " &
+" PC0   : 19  , " &
+" PC1   : 20  , " &
+" TCK   : 21  , " &
+" TMS   : 22  , " &
+" TDO   : 23  , " &
+" TDI   : 24  , " &
+" PC6   : 25  , " &
+" PC7   : 26  , " &
+" PD    : (9,10,11,12,13,14,15,16)  , " &
+" AREF  : 29  , " &
+" GND3  : 28  , " &
+" AVCC  : 27  " ;
+
+constant  MLF : PIN_MAP_STRING:=    
+" RESET : 4 , " &
+" VCC   : 5 , " &
+" VCC1  : 17  , " &
+" VCC2  : 38  , " &
+" GND   : 6 , " &
+" GND1  : 18  , " &
+" GND2  : 39  , " &
+" XTAL1 : 8 , " &
+" XTAL2 : 7 , " &
+" PA    : (37,36,35,34,33,32,31,30) , " &
+" PB    : (40,41,42,43,44,1,2,3)  , " &
+" PC0   : 19  , " &
+" PC1   : 20  , " &
+" TCK   : 21  , " &
+" TMS   : 22  , " &
+" TDO   : 23  , " &
+" TDI   : 24  , " &
+" PC6   : 25  , " &
+" PC7   : 26  , " &
+" PD    : (9,10,11,12,13,14,15,16)  , " &
+" AREF  : 29  , " &
+" GND3  : 28  , " &
+" AVCC  : 27  " ; 
+
+attribute TAP_SCAN_IN of  TDI : signal is true  ;
+attribute TAP_SCAN_OUT  of  TDO : signal is true  ;
+attribute TAP_SCAN_MODE of  TMS : signal is true  ;
+attribute TAP_SCAN_CLOCK  of  TCK : signal is (8.0e6, BOTH) ;
+
+attribute INSTRUCTION_LENGTH  of  ATmega644P  : entity is 4 ;
+            
+attribute INSTRUCTION_OPCODE  of  ATmega644P  : entity is   
+" EXTEST    ( 0000  )," & 
+" IDCODE    ( 0001  )," & 
+" SAMPLE    ( 0010  )," & 
+" PRIVATE0  ( 1000  )," & 
+" PRIVATE1  ( 1001  )," & 
+" PRIVATE2  ( 1010  )," & 
+" PRIVATE3  ( 1011  )," &                       
+" AVR_RESET ( 1100  )," &                       
+" BYPASS    ( 1111  )"  ;                       
+
+attribute INSTRUCTION_CAPTURE of  ATmega644P  : entity is " 0001  ";                      
+                                  
+attribute INSTRUCTION_PRIVATE of  ATmega644P  : entity is                         
+" PRIVATE0  ,"  &                           
+" PRIVATE1  ,"  &                           
+" PRIVATE2  ,"  &                           
+" PRIVATE3  " ;                           
+                                  
+attribute IDCODE_REGISTER of  ATmega644P  : entity is                         
+  "0001"  &                             
+  "1001011000001010"  &                             
+  "00000011111" &                             
+  "1" ;                             
+
+attribute REGISTER_ACCESS of  ATmega644P  : entity is                         
+" BOUNDARY  ( AVR_RESET )"  ;                       
+
+attribute BOUNDARY_LENGTH of  ATmega644P  : entity is 57 ;                     
+                                  
+attribute BOUNDARY_REGISTER of  ATmega644P  : entity is                         
+--  num   cell    port    func    safe    [ccell    dis   rslt]   
+
+" 56    ( BC_7  , PB(0) , bidir , X , 55  , 0 , Z )," &
+" 55    ( BC_1  , * , control , 0             )," &
+" 54    ( BC_7  , PB(1) , bidir , X , 53  , 0 , Z )," &
+" 53    ( BC_1  , * , control , 0             )," &
+" 52    ( BC_7  , PB(2) , bidir , X , 51  , 0 , Z )," &
+" 51    ( BC_1  , * , control , 0             )," &
+" 50    ( BC_7  , PB(3) , bidir , X , 49  , 0 , Z )," &
+" 49    ( BC_1  , * , control , 0             )," &
+" 48    ( BC_7  , PB(4) , bidir , X , 47  , 0 , Z )," &
+" 47    ( BC_1  , * , control , 0             )," &
+" 46    ( BC_7  , PB(5) , bidir , X , 45  , 0 , Z )," &
+" 45    ( BC_1  , * , control , 0             )," &
+" 44    ( BC_7  , PB(6) , bidir , X , 43  , 0 , Z )," &
+" 43    ( BC_1  , * , control , 0             )," &
+" 42    ( BC_7  , PB(7) , bidir , X , 41  , 0 , Z )," &
+" 41    ( BC_1  , * , control , 0             )," &
+" 40    ( BC_4  , RESET , observe_only  , X       )," &
+" 39    ( BC_7  , PD(0) , bidir , X , 38  , 0 , Z )," &
+" 38  	( BC_1  , * , control , 0             )," &
+" 37  	( BC_7  , PD(1) , bidir , X , 36  , 0 , Z )," &
+" 36  	( BC_1  , * , control , 0             )," &
+" 35  	( BC_7  , PD(2) , bidir , X , 34  , 0 , Z )," &
+" 34  	( BC_1  , * , control , 0             )," &
+" 33  	( BC_7  , PD(3) , bidir , X , 32  , 0 , Z )," &
+" 32  	( BC_1  , * , control , 0             )," &
+" 31  	( BC_7  , PD(4) , bidir , X , 30  , 0 , Z )," &
+" 30  	( BC_1  , * , control , 0             )," &
+" 29  	( BC_7  , PD(5) , bidir , X , 28  , 0 , Z )," &
+" 28  	( BC_1  , * , control , 0             )," &
+" 27  	( BC_7  , PD(6) , bidir , X , 26  , 0 , Z )," &
+" 26  	( BC_1  , * , control , 0             )," &
+" 25  	( BC_7  , PD(7) , bidir , X , 24  , 0 , Z )," &
+" 24  	( BC_1  , * , control , 0             )," &
+" 23  	( BC_7  , PC0 , bidir , X , 22  , 0 , Z )," &
+" 22  	( BC_1  , * , control , 0             )," &
+" 21  	( BC_7  , PC1 , bidir , X , 20  , 0 , Z )," &
+" 20  	( BC_1  , * , control , 0             )," &
+" 19  	( BC_7  , PC6 , bidir , X , 18  , 0 , Z )," &
+" 18  	( BC_1  , * , control , 0             )," &
+" 17  	( BC_7  , PC7 , bidir , X , 16  , 0 , Z )," &
+" 16  	( BC_1  , * , control , 0             )," &
+" 15  	( BC_7  , PA(7) , bidir , X , 14  , 0 , Z )," &
+" 14  	( BC_1  , * , control , 0             )," &
+" 13  	( BC_7  , PA(6) , bidir , X , 12  , 0 , Z )," &
+" 12  	( BC_1  , * , control , 0             )," &
+" 11 	( BC_7  , PA(5) , bidir , X , 10 , 0 , Z )," &
+" 10  	( BC_1  , * , control , 0             )," &
+" 9 	( BC_7  , PA(4) , bidir , X , 8 , 0 , Z )," &
+" 8	 	( BC_1  , * , control , 0             )," &
+" 7 	( BC_7  , PA(3) , bidir , X , 6 , 0 , Z )," &
+" 6 	( BC_1  , * , control , 0             )," &
+" 5 	( BC_7  , PA(2) , bidir , X , 4 , 0 , Z )," &
+" 4 	( BC_1  , * , control , 0             )," &
+" 3 	( BC_7  , PA(1) , bidir , X , 2 , 0 , Z )," &
+" 2 	( BC_1  , * , control , 0             )," &
+" 1 	( BC_7  , PA(0) , bidir , X , 0 , 0 , Z )," &
+" 0 	( BC_1  , * , control , 0             ) " ; 
+
+end ATmega644P  ;                             
+
